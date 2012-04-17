@@ -14,6 +14,11 @@ made to use one of these two tools based on detected platform.
 You can override krb5['authconfig'] with an execute command, as a string.
 Which should configure PAM to use Kerberos on other systems.
 
+You really need to have time synchronized within 5 minutes of your domain
+controllers, or key distribution centers.  Therefore the recipe depends
+on the Opscode NTP cookbook.  If you have another method of keeping accurate
+clocks, change the metadata according to your needs.
+
 Attributes
 ==========
 
