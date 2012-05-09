@@ -23,7 +23,7 @@ end
 
 execute "authconfig" do
   command node['krb5']['authconfig'] 
-  not_if "grep pam_krb5 /etc/pam.d/system-auth" || "grep pam_krb5 /etc/pam.d/common-auth"
+  not_if { "grep pam_krb5 /etc/pam.d/system-auth" || "grep pam_krb5 /etc/pam.d/common-auth" }
   action :nothing
 end
 
