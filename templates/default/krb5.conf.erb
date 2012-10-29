@@ -9,8 +9,9 @@
  default_realm = <%= node['krb5']['default_realm'].upcase %>
  dns_lookup_realm = false
  dns_lookup_kdc = <%= node['krb5']['lookup_kdc'] %>
- ticket_lifetime = 24h
- forwardable = yes
+ ticket_lifetime = <%= node['krb5']['ticket_lifetime'] %>
+ renew_lifetime = <%= node['krb5']['renew_lifetime'] %>
+ forwardable = <%= node['krb5']['forwardable'] %>
 
 [realms]
  <% unless node['krb5']['default_realm_kdcs'].empty? -%>
@@ -29,8 +30,8 @@
 [appdefaults]
  pam = {
    debug = false
-   ticket_lifetime = 36000
-   renew_lifetime = 36000
-   forwardable = true
+   ticket_lifetime = <%= node['krb5']['ticket_lifetime'] %>
+   renew_lifetime = <%= node['krb5']['renew_lifetime'] %>
+   forwardable = <%= node['krb5']['forwardable'] %>
    krb4_convert = false
  }
