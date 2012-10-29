@@ -33,3 +33,6 @@ default['krb5']['default_realm'] = node['domain']
 default['krb5']['realms'] = [ node['domain'] ]
 default['krb5']['default_realm_kdcs'] = Array.new
 default['krb5']['lookup_kdc'] = "true"
+default['krb5']['ticket_lifetime'] = "24h"
+default['krb5']['renew_lifetime'] = "24h"
+default['krb5']['forwardable'] = "true"
