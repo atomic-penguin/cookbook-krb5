@@ -24,6 +24,9 @@ when "redhat","centos","scientific","amazon"
 when "debian","ubuntu"
   default['krb5']['packages'] = [ "libpam-krb5", "libpam-runtime", "libkrb5-3", "krb5-user" ]
   default['krb5']['authconfig'] = "pam-auth-update --package krb5"
+when "suse"
+  default['krb5']['packages'] = [ "krb5", "pam_krb5", "pam-config" ]
+  default['krb5']['authconfig'] = "authconfig --enableshadow --enablemd5 --enablekrb5 --enablelocauthorize --update"
 else
   default['krb5']['packages'] = Array.new
   default['krb5']['authconfig'] = Nil 
