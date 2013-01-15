@@ -3,6 +3,7 @@
 # Attributes:: default 
 #
 # Copyright 2012, Eric G. Wolfe 
+# Copyright 2013, Gerald L. Hevener Jr., M.S.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +27,7 @@ when "debian","ubuntu"
   default['krb5']['authconfig'] = "pam-auth-update --package krb5"
 when "suse"
   default['krb5']['packages'] = [ "krb5", "pam_krb5", "pam-config" ]
-  default['krb5']['authconfig'] = "authconfig --enableshadow --enablemd5 --enablekrb5 --enablelocauthorize --update"
+  default['krb5']['authconfig'] = "pam-config --add --krb5"
 else
   default['krb5']['packages'] = Array.new
   default['krb5']['authconfig'] = Nil 
