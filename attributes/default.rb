@@ -33,6 +33,7 @@ else
   default['krb5']['authconfig'] = Nil 
 end
 
+default['krb5']['default_logging'] = "FILE:/var/log/krb5libs.log"
 default['krb5']['default_realm'] = node['domain']
 default['krb5']['realms'] = [ node['domain'] ]
 default['krb5']['default_realm_kdcs'] = Array.new
