@@ -1,11 +1,17 @@
+krb5 Cookbook
+=============
+
+[![Build Status](https://secure.travis-ci.org/atomic-penguin/cookbook-krb5.png?branch=master)](http://travis-ci.org/atomic-penguin/cookbook-krb5)
+
+
 Description
-===========
+-----------
 
 Installs and configures Kerberos version 5 authentication modules
 on RedHat and Debian family systems.
 
 Requirements
-============
+------------
 
 Requires some PAM configuration script such as pam-auth-update on Debian
 family systems, or authconfig on Redhat family systems.  Best effort is
@@ -20,7 +26,7 @@ on the Opscode NTP cookbook.  If you have another method of keeping accurate
 clocks, change the metadata according to your needs.
 
 Attributes
-==========
+----------
 
  * `krb5['packages']` - Packages and libraries needed for Kerberos v5 authentication, detected for Redhat/Debian family systems.
  * `krb5['authconfig']` - Configuration script for PAM, detected for RedHat and Debian family systems.
@@ -31,7 +37,7 @@ Attributes
  * `krb5['default_logging']` - Default log location.  Default, 'FILE:/var/log/krb5libs.log'
 
 Usage
-=====
+-----
 
 Here are two example roles to be used with this recipe.  The first, is
 a single realm configuration, using the OHAI domain attribute for the realm.
@@ -70,3 +76,20 @@ override_attributes "krb5" => {
 }
 run_list "recipe[krb5]"
 ```
+
+License and Authors
+-------------------
+
+Author:: Eric G. Wolfe
+Copyright:: 2012
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License
