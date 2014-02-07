@@ -9,5 +9,5 @@ gem 'rainbow', '<= 1.99.1'
 
 group :integration do
   gem 'test-kitchen'
-  gem 'kitchen-docker'
+  gem 'kitchen-vagrant'
 end
