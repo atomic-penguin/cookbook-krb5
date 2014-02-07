@@ -22,12 +22,13 @@ clocks, change the metadata according to your needs.
 Attributes
 ==========
 
- * krb5['packages'] - Packages and libraries needed for Kerberos v5 authentication, detected for Redhat/Debian family systems.
- * krb5['authconfig'] - Configuration script for PAM, detected for RedHat and Debian family systems.
- * krb5['default\_realm'] - The default realm, defaults to OHAI's domain attribute.
- * krb5['realms'] - Array of all realms, including the default.  Defaults to OHAI's domain attribute.
- * krb5['default\_realm\_kdcs'] - Array of Kerberos servers, this is optional, and default empty.  
- * krb5['lookup\_kdcs'] - Set to true if you have SRV records for KDC discovery.  Default is true.
+ * `krb5['packages']` - Packages and libraries needed for Kerberos v5 authentication, detected for Redhat/Debian family systems.
+ * `krb5['authconfig']` - Configuration script for PAM, detected for RedHat and Debian family systems.
+ * `krb5['default_realm']` - The default realm, defaults to OHAI's domain attribute.
+ * `krb5['realms']` - Array of all realms, including the default.  Defaults to OHAI's domain attribute.
+ * `krb5['default_realm_kdcs']` - Array of Kerberos servers, this is optional, and default empty.  
+ * `krb5['lookup_kdcs']` - Set to true if you have SRV records for KDC discovery.  Default is true.
+ * `krb5['default_logging']` - Default log location.  Default, 'FILE:/var/log/krb5libs.log'
 
 Usage
 =====

@@ -21,15 +21,15 @@ node['krb5']['packages'].each do |krb5_package|
   package krb5_package
 end
 
-execute "authconfig" do
-  command node['krb5']['authconfig'] 
-  not_if { "grep pam_krb5 /etc/pam.d/system-auth" || "grep pam_krb5 /etc/pam.d/common-auth" }
+execute 'authconfig' do
+  command node['krb5']['authconfig']
+  not_if { 'grep pam_krb5 /etc/pam.d/system-auth' || 'grep pam_krb5 /etc/pam.d/common-auth' }
   action :nothing
 end
 
-template "/etc/krb5.conf" do
-  owner "root"
-  group "root"
-  mode "0644"
-  notifies :run, "execute[authconfig]"
+template '/etc/krb5.conf' do
+  owner 'root'
+  group 'root'
+  mode '0644'
+  notifies :run, 'execute[authconfig]'
 end
