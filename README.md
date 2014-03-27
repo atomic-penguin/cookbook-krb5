@@ -33,6 +33,7 @@ Attributes
  * `krb5['default_realm']` - The default realm, defaults to OHAI's domain attribute.
  * `krb5['realms']` - Array of all realms, including the default.  Defaults to OHAI's domain attribute.
  * `krb5['default_realm_kdcs']` - Array of Kerberos servers, this is optional, and default empty.  
+ * `krb5['default_realm_admin_server']` - Kerberos admin server, this is optional, and default empty
  * `krb5['lookup_kdcs']` - Set to true if you have SRV records for KDC discovery.  Default is true.
  * `krb5['default_logging']` - Default log location.  Default, 'FILE:/var/log/krb5libs.log'
 
