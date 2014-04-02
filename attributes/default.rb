@@ -54,3 +54,8 @@ default['krb5']['krb5_conf']['libdefaults']['dns_lookup_kdc'] = node['krb5']['lo
 default['krb5']['krb5_conf']['libdefaults']['forwardable'] = node['krb5']['forwardable']
 default['krb5']['krb5_conf']['libdefaults']['renew_lifetime'] = node['krb5']['renew_lifetime']
 default['krb5']['krb5_conf']['libdefaults']['ticket_lifetime'] = node['krb5']['ticket_lifetime']
+
+# realms
+default['krb5']['krb5_conf']['realms']['default_realm'] = node['krb5']['krb5_conf']['libdefaults']['default_realm']
+default['krb5']['krb5_conf']['realms']['default_realm_kdcs'] = node['krb5']['default_realm_kdcs']
+default['krb5']['krb5_conf']['realms']['realms'] = node['krb5']['realms']

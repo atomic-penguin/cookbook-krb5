@@ -17,19 +17,21 @@
 <% end %>
 <% end %>
 
+<% if @realms %>
 [realms]
- <% unless node['krb5']['default_realm_kdcs'].empty? -%>
- <%= node['krb5']['default_realm'].upcase %> = {
-  <% node['krb5']['default_realm_kdcs'].each do |kdc_server| -%>
+ <% unless node['krb5']['krb5_conf']['realms']['default_realm_kdcs'].empty? -%>
+ <%= node['krb5']['krb5_conf']['realms']['default_realm'].upcase %> = {
+  <% node['krb5']['krb5_conf']['realms']['default_realm_kdcs'].each do |kdc_server| -%>
   kdc = <%= kdc_server %>
   <% end -%>
  }
  <% end -%>
 
- <% node['krb5']['realms'].each do |krb5_realm| -%>
+ <% node['krb5']['krb5_conf']['realms']['realms'].each do |krb5_realm| -%>
  <%= krb5_realm.downcase -%> = <%= krb5_realm.upcase %>
  .<%= krb5_realm.downcase -%> = <%= krb5_realm.upcase %>
  <% end -%>
+<% end %>
 
 [appdefaults]
  pam = {
