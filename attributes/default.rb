@@ -46,6 +46,16 @@ default['krb5']['forwardable'] = 'true'
 default['krb5']['client']['packages'] = node['krb5']['packages']
 default['krb5']['client']['authconfig'] = node['krb5']['authconfig']
 
+# KDC Packages
+case node['platform_family']
+when 'rhel'
+  default['krb5']['kdc']['packages'] = %w(krb5-server)
+when 'debian'
+  default['krb5']['kdc']['packages'] = %w(krb5-kdc krb5-kdc-ldap)
+else
+  default['krb5']['kdc']['packages'] = []
+end
+
 # logging
 default['krb5']['krb5_conf']['logging']['default'] = node['krb5']['default_logging']
 default['krb5']['krb5_conf']['logging']['kdc'] = 'FILE:/var/log/krb5kdc.log'
