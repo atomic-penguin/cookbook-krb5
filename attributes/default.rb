@@ -59,3 +59,10 @@ default['krb5']['krb5_conf']['libdefaults']['ticket_lifetime'] = node['krb5']['t
 default['krb5']['krb5_conf']['realms']['default_realm'] = node['krb5']['krb5_conf']['libdefaults']['default_realm']
 default['krb5']['krb5_conf']['realms']['default_realm_kdcs'] = node['krb5']['default_realm_kdcs']
 default['krb5']['krb5_conf']['realms']['realms'] = node['krb5']['realms']
+
+# appdefaults
+default['krb5']['krb5_conf']['appdefaults']['pam']['debug'] = false
+default['krb5']['krb5_conf']['appdefaults']['pam']['forwardable'] = node['krb5']['krb5_conf']['libdefaults']['forwardable']
+default['krb5']['krb5_conf']['appdefaults']['pam']['renew_lifetime'] = node['krb5']['krb5_conf']['libdefaults']['renew_lifetime']
+default['krb5']['krb5_conf']['appdefaults']['pam']['ticket_lifetime'] = node['krb5']['krb5_conf']['libdefaults']['ticket_lifetime']
+default['krb5']['krb5_conf']['appdefaults']['pam']['krb4_convert'] = false
