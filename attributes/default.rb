@@ -41,3 +41,16 @@ default['krb5']['lookup_kdc'] = 'true'
 default['krb5']['ticket_lifetime'] = '24h'
 default['krb5']['renew_lifetime'] = '24h'
 default['krb5']['forwardable'] = 'true'
+
+# logging
+default['krb5']['krb5_conf']['logging']['default'] = node['krb5']['default_logging']
+default['krb5']['krb5_conf']['logging']['kdc'] = 'FILE:/var/log/krb5kdc.log'
+default['krb5']['krb5_conf']['logging']['admin_server'] = 'FILE:/var/log/kadmind.log'
+
+# libdefaults
+default['krb5']['krb5_conf']['libdefaults']['default_realm'] = node['krb5']['default_realm']
+default['krb5']['krb5_conf']['libdefaults']['dns_lookup_realm'] = false
+default['krb5']['krb5_conf']['libdefaults']['dns_lookup_kdc'] = node['krb5']['lookup_kdc']
+default['krb5']['krb5_conf']['libdefaults']['forwardable'] = node['krb5']['forwardable']
+default['krb5']['krb5_conf']['libdefaults']['renew_lifetime'] = node['krb5']['renew_lifetime']
+default['krb5']['krb5_conf']['libdefaults']['ticket_lifetime'] = node['krb5']['ticket_lifetime']
