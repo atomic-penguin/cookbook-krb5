@@ -31,5 +31,6 @@ template '/etc/krb5.conf' do
   owner 'root'
   group 'root'
   mode '0644'
+  variables node['krb5']['krb5_conf']
   notifies :run, 'execute[authconfig]'
 end
