@@ -42,6 +42,10 @@ default['krb5']['ticket_lifetime'] = '24h'
 default['krb5']['renew_lifetime'] = '24h'
 default['krb5']['forwardable'] = 'true'
 
+# Client Packages
+default['krb5']['client']['packages'] = node['krb5']['packages']
+default['krb5']['client']['authconfig'] = node['krb5']['authconfig']
+
 # logging
 default['krb5']['krb5_conf']['logging']['default'] = node['krb5']['default_logging']
 default['krb5']['krb5_conf']['logging']['kdc'] = 'FILE:/var/log/krb5kdc.log'

@@ -17,12 +17,12 @@
 # limitations under the License.
 #
 
-node['krb5']['packages'].each do |krb5_package|
+node['krb5']['client']['packages'].each do |krb5_package|
   package krb5_package
 end
 
-execute 'authconfig' do
-  command node['krb5']['authconfig']
+execute 'krb5-authconfig' do
+  command node['krb5']['client']['authconfig']
   not_if { 'grep pam_krb5 /etc/pam.d/system-auth' || 'grep pam_krb5 /etc/pam.d/common-auth' }
   action :nothing
 end
@@ -32,5 +32,5 @@ template '/etc/krb5.conf' do
   group 'root'
   mode '0644'
   variables node['krb5']['krb5_conf']
-  notifies :run, 'execute[authconfig]'
+  notifies :run, 'execute[krb5-authconfig]'
 end
