@@ -46,7 +46,7 @@ execute "create-krb5-db" do
 end
 
 execute "create-admin-principal" do
-  command "echo #{node['krb5']['admin_password']} | kadmin.local -q 'addprinc #{node['krb5']['admin_principal']}"
+  command "echo #{node['krb5']['admin_password']} | kadmin.local -q 'addprinc #{node['krb5']['admin_principal']}'"
 end
 
 service kadm_svc do
