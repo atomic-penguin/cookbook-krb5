@@ -1,9 +1,7 @@
 #
 # Cookbook Name:: krb5
-# Attributes:: kadmin
+# Recipe:: kadmin
 #
-# Copyright 2012, Eric G. Wolfe
-# Copyright 2013, Gerald L. Hevener Jr., M.S.
 # Copyright 2014, Continuuity, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,28 +17,38 @@
 # limitations under the License.
 #
 
-# Admin Server packages
-case node['platform_family']
-when 'rhel'
-  default['krb5']['kadmin']['packages'] = %w(krb5-server)
-  kdc_dir = "/var/kerberos/krb5kdc"
-  etc_dir = kdc_dir
-when 'debian'
-  default['krb5']['kadmin']['packages'] = %w(krb5-admin-server)
-  kdc_dir = "/var/lib/krb5kdc"
-  etc_dir = "/etc/krb5kdc"
-else
-  default['krb5']['kadmin']['packages'] = []
+include_recipe 'krb5::kdc'
+
+node['krb5']['kadmin']['packages'].each do |krb5_package|
+  package krb5_package
 end
 
-# Master password
-default['krb5']['master_password'] = 'password'
+case node['platform_family']
+when 'rhel'
+  kdc_dir = "/var/kerberos/krb5kdc"
+  etc_dir = kdc_dir
+  kadm_svc = "kadmin"
+when 'debian'
+  kdc_dir = "/var/lib/krb5kdc"
+  etc_dir = "/etc/krb5kdc"
+  kadm_svc = "krb5-admin-server"
+end
 
-# Admin user
-default['krb5']['admin_principal'] = 'admin/admin'
-default['krb5']['admin_password'] = 'password'
+template "#{etc_dir}/kadm5.acl" do
+  owner 'root'
+  group 'root'
+  mode '0644'
+end
 
-# kadm5.acl
-default['krb5']['kadm5_acl'] = {
-  "*/admin@#{node['krb5']['krb5_conf']['libdefaults']['default_realm'].upcase}" => [ "*" ]
-}
+execute "create-krb5-db" do
+  command "echo '#{node['krb5']['master_password']}\n#{node['krb5']['master_password']}\n' | kdb5_util create -s"
+  not_if "test -e #{kdc_dir}/principal"
+end
+
+execute "create-admin-principal" do
+  command "echo #{node['krb5']['admin_password']} | kadmin.local -q 'addprinc #{node['krb5']['admin_principal']}"
+end
+
+service kadm_svc do
+  action :nothing
+end
