@@ -4,6 +4,7 @@
 #
 # Copyright 2012, Eric G. Wolfe
 # Copyright 2013, Gerald L. Hevener Jr., M.S.
+# Copyright 2014, Continuuity, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,16 +46,6 @@ default['krb5']['forwardable'] = 'true'
 # Client Packages
 default['krb5']['client']['packages'] = node['krb5']['packages']
 default['krb5']['client']['authconfig'] = node['krb5']['authconfig']
-
-# KDC Packages
-case node['platform_family']
-when 'rhel'
-  default['krb5']['kdc']['packages'] = %w(krb5-server)
-when 'debian'
-  default['krb5']['kdc']['packages'] = %w(krb5-kdc krb5-kdc-ldap)
-else
-  default['krb5']['kdc']['packages'] = []
-end
 
 # logging
 default['krb5']['krb5_conf']['logging']['default'] = node['krb5']['default_logging']
