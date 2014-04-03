@@ -25,9 +25,11 @@ case node['platform_family']
 when 'rhel'
   kdc_dir = "/var/kerberos/krb5kdc"
   etc_dir = kdc_dir
+  kdc_svc = "krb5kdc"
 when 'debian'
   kdc_dir = "/var/lib/krb5kdc"
   etc_dir = "/etc/krb5kdc"
+  kdc_svc = "krb5-kdc"
 end
 
 template "#{etc_dir}/kdc.conf" do
@@ -35,4 +37,8 @@ template "#{etc_dir}/kdc.conf" do
   group 'root'
   mode '0644'
   variables node['krb5']['kdc_conf']
+end
+
+service kdc_svc do
+  action :nothing
 end
