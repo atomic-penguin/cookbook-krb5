@@ -63,6 +63,7 @@ default['krb5']['krb5_conf']['libdefaults']['ticket_lifetime'] = node['krb5']['t
 # realms
 default['krb5']['krb5_conf']['realms']['default_realm'] = node['krb5']['krb5_conf']['libdefaults']['default_realm']
 default['krb5']['krb5_conf']['realms']['default_realm_kdcs'] = node['krb5']['default_realm_kdcs']
+default['krb5']['krb5_conf']['realms']['default_realm_admin_server'] = ''
 default['krb5']['krb5_conf']['realms']['realms'] = node['krb5']['realms']
 
 # appdefaults
