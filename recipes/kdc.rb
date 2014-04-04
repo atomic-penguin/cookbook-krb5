@@ -23,13 +23,12 @@ end
 
 case node['platform_family']
 when 'rhel'
-  kdc_dir = "/var/kerberos/krb5kdc"
+  kdc_dir = '/var/kerberos/krb5kdc'
   etc_dir = kdc_dir
-  kdc_svc = "krb5kdc"
+  kdc_svc = 'krb5kdc'
 when 'debian'
-  kdc_dir = "/var/lib/krb5kdc"
-  etc_dir = "/etc/krb5kdc"
-  kdc_svc = "krb5-kdc"
+  etc_dir = '/etc/krb5kdc'
+  kdc_svc = 'krb5-kdc'
 end
 
 template "#{etc_dir}/kdc.conf" do

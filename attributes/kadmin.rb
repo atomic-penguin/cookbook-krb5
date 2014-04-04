@@ -21,12 +21,8 @@
 case node['platform_family']
 when 'rhel'
   default['krb5']['kadmin']['packages'] = %w(krb5-server)
-  kdc_dir = "/var/kerberos/krb5kdc"
-  etc_dir = kdc_dir
 when 'debian'
   default['krb5']['kadmin']['packages'] = %w(krb5-admin-server)
-  kdc_dir = "/var/lib/krb5kdc"
-  etc_dir = "/etc/krb5kdc"
 else
   default['krb5']['kadmin']['packages'] = []
 end
@@ -40,5 +36,5 @@ default['krb5']['admin_password'] = 'password'
 
 # kadm5.acl
 default['krb5']['kadm5_acl'] = {
-  "*/admin@#{node['krb5']['krb5_conf']['libdefaults']['default_realm'].upcase}" => [ "*" ]
+  "*/admin@#{node['krb5']['krb5_conf']['libdefaults']['default_realm'].upcase}" => ['*']
 }

@@ -21,12 +21,11 @@
 case node['platform_family']
 when 'rhel'
   default['krb5']['kdc']['packages'] = %w(krb5-server)
-  kdc_dir = "/var/kerberos/krb5kdc"
+  kdc_dir = '/var/kerberos/krb5kdc'
   etc_dir = kdc_dir
 when 'debian'
   default['krb5']['kdc']['packages'] = %w(krb5-kdc krb5-kdc-ldap)
-  kdc_dir = "/var/lib/krb5kdc"
-  etc_dir = "/etc/krb5kdc"
+  etc_dir = '/etc/krb5kdc'
 else
   default['krb5']['kdc']['packages'] = []
 end

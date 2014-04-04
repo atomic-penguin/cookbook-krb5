@@ -23,13 +23,13 @@ end
 
 case node['platform_family']
 when 'rhel'
-  kdc_dir = "/var/kerberos/krb5kdc"
+  kdc_dir = '/var/kerberos/krb5kdc'
   etc_dir = kdc_dir
-  kadm_svc = "kadmin"
+  kadm_svc = 'kadmin'
 when 'debian'
-  kdc_dir = "/var/lib/krb5kdc"
-  etc_dir = "/etc/krb5kdc"
-  kadm_svc = "krb5-admin-server"
+  kdc_dir = '/var/lib/krb5kdc'
+  etc_dir = '/etc/krb5kdc'
+  kadm_svc = 'krb5-admin-server'
 end
 
 template "#{etc_dir}/kadm5.acl" do
@@ -39,18 +39,18 @@ template "#{etc_dir}/kadm5.acl" do
   not_if { node['krb5']['kadm5_acl'].empty? }
 end
 
-log "create-krb5-db" do
-  message "Creating Kerberos Database... this may take a while..."
+log 'create-krb5-db' do
+  message 'Creating Kerberos Database... this may take a while...'
   level :info
   not_if "test -e #{kdc_dir}/principal"
 end
 
-execute "create-krb5-db" do
+execute 'create-krb5-db' do
   command "echo '#{node['krb5']['master_password']}\n#{node['krb5']['master_password']}\n' | kdb5_util create -s"
   not_if "test -e #{kdc_dir}/principal"
 end
 
-execute "create-admin-principal" do
+execute 'create-admin-principal' do
   command "echo '#{node['krb5']['admin_password']}\n#{node['krb5']['admin_password']}\n' | kadmin.local -q 'addprinc #{node['krb5']['admin_principal']}'"
   not_if "kadmin.local -q 'list_principals' | grep -e ^#{node['krb5']['admin_principal']}"
 end
