@@ -41,4 +41,3 @@ default['krb5']['kdc_conf']['kdcdefaults']['kdc_ports'] = '88'
 # realms
 default['krb5']['kdc_conf']['realms'][default_realm]['acl_file'] = "#{etc_dir}/kadm5.acl"
 default['krb5']['kdc_conf']['realms'][default_realm]['admin_keytab'] = "FILE:#{etc_dir}/kadm5.keytab"
-default['krb5']['kdc_conf']['realms'][default_realm]['key_stash_file'] = "#{etc_dir}/stash"
