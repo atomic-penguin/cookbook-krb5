@@ -17,8 +17,6 @@
 # limitations under the License.
 #
 
-include_recipe 'krb5::kdc'
-
 node['krb5']['kadmin']['packages'].each do |krb5_package|
   package krb5_package
 end
@@ -40,15 +38,24 @@ template "#{etc_dir}/kadm5.acl" do
   mode '0644'
 end
 
+log "create-krb5-db" do
+  message "Creating Kerberos Database... this may take a while..."
+  level :info
+  not_if "test -e #{kdc_dir}/principal"
+end
+
 execute "create-krb5-db" do
   command "echo '#{node['krb5']['master_password']}\n#{node['krb5']['master_password']}\n' | kdb5_util create -s"
   not_if "test -e #{kdc_dir}/principal"
 end
 
 execute "create-admin-principal" do
-  command "echo #{node['krb5']['admin_password']} | kadmin.local -q 'addprinc #{node['krb5']['admin_principal']}'"
+  command "echo '#{node['krb5']['admin_password']}\n#{node['krb5']['admin_password']}\n' | kadmin.local -q 'addprinc #{node['krb5']['admin_principal']}'"
+  not_if "kadmin.local -q 'list_principals' | grep -e ^#{node['krb5']['admin_principal']}"
 end
 
+include_recipe 'krb5::kdc'
+
 service kadm_svc do
-  action :nothing
+  action :start
 end
