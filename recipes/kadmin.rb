@@ -36,6 +36,7 @@ template "#{etc_dir}/kadm5.acl" do
   owner 'root'
   group 'root'
   mode '0644'
+  not_if { node['krb5']['kadm5_acl'].empty? }
 end
 
 log "create-krb5-db" do
