@@ -8,7 +8,7 @@ describe 'krb5::default' do
       end.converge(described_recipe)
     end
 
-    %w[krb5-libs krb5-workstation pam pam_krb5 authconfig].each do |krb5_pkg|
+    %w(krb5-libs krb5-workstation pam pam_krb5 authconfig).each do |krb5_pkg|
       it "installs #{krb5_pkg} package" do
         expect(chef_run).to install_package(krb5_pkg)
       end
@@ -28,7 +28,7 @@ describe 'krb5::default' do
       end.converge(described_recipe)
     end
 
-    %w[libpam-krb5 libpam-runtime libkrb5-3 krb5-user].each do |krb5_pkg|
+    %w(libpam-krb5 libpam-runtime libkrb5-3 krb5-user).each do |krb5_pkg|
       it "installs #{krb5_pkg} package" do
         expect(chef_run).to install_package(krb5_pkg)
       end
