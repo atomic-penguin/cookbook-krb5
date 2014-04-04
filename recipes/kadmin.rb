@@ -32,7 +32,9 @@ when 'debian'
   kadm_svc = 'krb5-admin-server'
 end
 
-template "#{etc_dir}/kadm5.acl" do
+default_realm = node['krb5']['krb5_conf']['libdefaults']['default_realm'].upcase
+
+template node['krb5']['kdc_conf']['realms'][default_realm]['acl_file'] do
   owner 'root'
   group 'root'
   mode '0644'
