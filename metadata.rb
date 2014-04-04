@@ -9,3 +9,5 @@ version '0.3.0'
 %w(redhat centos scientific amazon ubuntu debian suse).each do |os|
   supports os
 end
+
+depends 'ntp'
