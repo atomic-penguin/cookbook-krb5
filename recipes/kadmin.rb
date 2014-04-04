@@ -24,11 +24,9 @@ end
 case node['platform_family']
 when 'rhel'
   kdc_dir = '/var/kerberos/krb5kdc'
-  etc_dir = kdc_dir
   kadm_svc = 'kadmin'
 when 'debian'
   kdc_dir = '/var/lib/krb5kdc'
-  etc_dir = '/etc/krb5kdc'
   kadm_svc = 'krb5-admin-server'
 end
 
