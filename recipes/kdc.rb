@@ -40,5 +40,5 @@ template "#{etc_dir}/kdc.conf" do
 end
 
 service kdc_svc do
-  action :nothing
+  action :start
 end
