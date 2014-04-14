@@ -26,3 +26,4 @@ default['krb5']['kdc_conf']['kdcdefaults']['kdc_tcp_ports'] = '88'
 # realms
 default['krb5']['kdc_conf']['realms'][default_realm]['acl_file'] = "#{node['krb5']['conf_dir']}/kadm5.acl"
 default['krb5']['kdc_conf']['realms'][default_realm]['admin_keytab'] = "FILE:#{node['krb5']['conf_dir']}/kadm5.keytab"
+default['krb5']['kdc_conf']['realms'][default_realm]['database_name'] = "#{node['krb5']['data_dir']}/principal"
