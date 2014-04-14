@@ -17,14 +17,11 @@ describe 'krb5::kadmin' do
     end
 
     it 'renders file kadm5.acl with realm EXAMPLE.COM' do
-      expect(chef_run).to render_file('/var/kerberos/krb5kdc/kadm5.acl').with_content(
+      expect(chef_run).to render_file('/etc/krb5kdc/kadm5.acl').with_content(
         /\*\/admin@EXAMPLE.COM\t\*/
       )
     end
 
-#    it 'creates principal database' do
-#      expect(chef_run).to render_file('/var/kerberos/krb5kdc/principal')
-#    end
   end
 
   context 'on Ubuntu 13.04' do

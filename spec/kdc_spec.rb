@@ -8,15 +8,15 @@ describe 'krb5::kdc' do
       end.converge(described_recipe)
     end
 
-    %w(krb5-server).each do |krb5_pkg|
+    %w(krb5-server krb5-server-ldap).each do |krb5_pkg|
       it "installs #{krb5_pkg} package" do
         expect(chef_run).to install_package(krb5_pkg)
       end
     end
 
     it 'renders file kdc.conf with realm EXAMPLE.COM' do
-      expect(chef_run).to render_file('/var/kerberos/krb5kdc/kdc.conf').with_content(
-        %r{acl_file\s+=\s+/var/kerberos/krb5kdc/kadm5.acl}
+      expect(chef_run).to render_file('/etc/krb5kdc/kdc.conf').with_content(
+        %r{acl_file\s+=\s+/etc/krb5kdc/kadm5.acl}
       )
     end
   end
