@@ -17,13 +17,6 @@
 # limitations under the License.
 #
 
-# KDC Packages
-case node['platform_family']
-when 'rhel'
-when 'debian'
-else
-end
-
 default_realm = node['krb5']['krb5_conf']['libdefaults']['default_realm'].upcase
 
 # kdcdefaults
