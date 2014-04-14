@@ -18,20 +18,9 @@
 #
 
 include_recipe 'krb5::default'
+include_recipe 'krb5::kadmin'
 
-node.default['krb5']['krb5_conf']['realms']['default_realm_admin_server'] = node['fqdn']
-
-node['krb5']['kadmin']['packages'].each do |krb5_package|
-  package krb5_package
+service 'krb5-admin-server' do
+  service_name node['krb5']['kadmin']['service_name']
+  action :nothing
 end
-
-default_realm = node['krb5']['krb5_conf']['libdefaults']['default_realm'].upcase
-
-template node['krb5']['kdc_conf']['realms'][default_realm]['acl_file'] do
-  owner 'root'
-  group 'root'
-  mode '0644'
-  not_if { node['krb5']['kadm5_acl'].empty? }
-end
-
-include_recipe 'krb5::kdc'
