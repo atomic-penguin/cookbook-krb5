@@ -20,14 +20,8 @@
 # KDC Packages
 case node['platform_family']
 when 'rhel'
-  default['krb5']['kdc']['packages'] = %w(krb5-server krb5-server-ldap)
-  kdc_dir = '/var/kerberos/krb5kdc'
-  etc_dir = kdc_dir
 when 'debian'
-  default['krb5']['kdc']['packages'] = %w(krb5-kdc krb5-kdc-ldap)
-  etc_dir = '/etc/krb5kdc'
 else
-  default['krb5']['kdc']['packages'] = []
 end
 
 default_realm = node['krb5']['krb5_conf']['libdefaults']['default_realm'].upcase
@@ -37,5 +31,5 @@ default['krb5']['kdc_conf']['kdcdefaults']['kdc_ports'] = '88'
 default['krb5']['kdc_conf']['kdcdefaults']['kdc_tcp_ports'] = '88'
 
 # realms
-default['krb5']['kdc_conf']['realms'][default_realm]['acl_file'] = "#{etc_dir}/kadm5.acl"
-default['krb5']['kdc_conf']['realms'][default_realm]['admin_keytab'] = "FILE:#{etc_dir}/kadm5.keytab"
+default['krb5']['kdc_conf']['realms'][default_realm]['acl_file'] = "#{node['krb5']['conf_dir']}/kadm5.acl"
+default['krb5']['kdc_conf']['realms'][default_realm]['admin_keytab'] = "FILE:#{node['krb5']['conf_dir']}/kadm5.keytab"
