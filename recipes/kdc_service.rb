@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: krb5
-# Recipe:: kdc
+# Recipe:: kdc_service
 #
 # Copyright 2014, Continuuity, Inc.
 #
@@ -18,18 +18,9 @@
 #
 
 include_recipe 'krb5::default'
+include_recipe 'krb5::kdc'
 
-node.default['krb5']['krb5_conf']['realms']['default_realm_kdcs'] = node['krb5']['krb5_conf']['realms']['default_realm_kdcs'] + [ node['fqdn'] ]
-
-node['krb5']['kdc']['packages'].each do |krb5_package|
-  package krb5_package
+service 'krb5-kdc' do
+  service_name node['krb5']['kdc']['service_name']
+  action :nothing
 end
-
-template "#{node['krb5']['data_dir']}/kdc.conf" do
-  owner 'root'
-  group 'root'
-  mode '0644'
-  variables node['krb5']['kdc_conf']
-end
-
-include_recipe 'krb5::kdc_service'
