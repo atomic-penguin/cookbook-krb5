@@ -15,7 +15,7 @@ describe 'krb5::kdc' do
     end
 
     it 'renders file kdc.conf with realm EXAMPLE.COM' do
-      expect(chef_run).to render_file('/etc/krb5kdc/kdc.conf').with_content(
+      expect(chef_run).to render_file('/var/kerberos/krb5kdc/kdc.conf').with_content(
         %r{acl_file\s+=\s+/etc/krb5kdc/kadm5.acl}
       )
     end
