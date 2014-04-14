@@ -14,6 +14,10 @@ describe 'krb5::default' do
       end
     end
 
+    it 'creates krb5.conf template' do
+      expect(chef_run).to create_template('/etc/krb5.conf')
+    end
+
     it 'renders file krb5.conf with realm EXAMPLE.COM' do
       expect(chef_run).to render_file('/etc/krb5.conf').with_content(
         /default_realm\s+=\s+EXAMPLE.COM/

@@ -16,6 +16,10 @@ describe 'krb5::kadmin' do
       end
     end
 
+    it 'creates kadm5.acl template' do
+      expect(chef_run).to create_template('/etc/krb5kdc/kadm5.acl')
+    end
+
     it 'renders file kadm5.acl with realm EXAMPLE.COM' do
       expect(chef_run).to render_file('/etc/krb5kdc/kadm5.acl').with_content(
         /\*\/admin@EXAMPLE.COM\t\*/

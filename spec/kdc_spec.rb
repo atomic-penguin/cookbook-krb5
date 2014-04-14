@@ -14,6 +14,10 @@ describe 'krb5::kdc' do
       end
     end
 
+    it 'creates kdc.conf template' do
+      expect(chef_run).to create_template('/var/kerberos/krb5kdc/kdc.conf')
+    end
+
     it 'renders file kdc.conf with realm EXAMPLE.COM' do
       expect(chef_run).to render_file('/var/kerberos/krb5kdc/kdc.conf').with_content(
         %r{acl_file\s+=\s+/etc/krb5kdc/kadm5.acl}
@@ -33,5 +37,10 @@ describe 'krb5::kdc' do
         expect(chef_run).to install_package(krb5_pkg)
       end
     end
+
+    it 'creates kdc.conf template' do
+      expect(chef_run).to create_template('/var/lib/krb5kdc/kdc.conf')
+    end
+
   end
 end
