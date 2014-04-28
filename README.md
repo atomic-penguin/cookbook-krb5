@@ -1,7 +1,7 @@
 krb5 Cookbook
 =============
 
-[![Build Status](https://secure.travis-ci.org/atomic-penguin/cookbook-krb5.png?branch=master)](http://travis-ci.org/atomic-penguin/cookbook-krb5)
+[![Build Status](https://secure.travis-ci.org/atomic-penguin/cookbook-krb5.svg?branch=master)](http://travis-ci.org/atomic-penguin/cookbook-krb5)
 
 
 Description
