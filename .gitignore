@@ -7,3 +7,4 @@ metadata.json
 checkstyle.xml
 .vagrant
 .bundle
+.chef

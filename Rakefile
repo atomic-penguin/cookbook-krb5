@@ -37,6 +37,12 @@ task :deploy do
   sh 'berks apply ci'
 end
 
+# share cookbook to Chef community site
+desc 'Share cookbook to community site'
+task :share do
+  sh 'knife cookbook site share krb5 other'
+end
+
 # default tasks are quick, commit tests
 task :default => %w(foodcritic rubocop chefspec)
 
