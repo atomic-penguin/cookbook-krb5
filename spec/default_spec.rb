@@ -14,6 +14,10 @@ describe 'krb5::default' do
       end
     end
 
+    it 'creates the /etc/krb5kdc directory' do
+      expect(chef_run).to create_directory('/etc/krb5kdc')
+    end
+
     it 'creates krb5.conf template' do
       expect(chef_run).to create_template('/etc/krb5.conf')
     end
