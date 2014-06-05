@@ -105,11 +105,15 @@ a single realm configuration, using the OHAI domain attribute for the realm.
 name "krb5_domain"
 description "Configures Kerberos 5 Authentication for domain realm"
 override_attributes "krb5" => {
-  "default_realm_kdcs" => [
-    "kdc1.example.com",
-    "kdc2.example.com",
-    "kdc3.example.com"
-  ]
+   "krb5_conf" => {
+    "realms" => {
+      "default_realm_kdcs" => [
+        "kdc1.example.com",
+        "kdc2.example.com",
+        "kdc3.example.com"
+      ]
+    }
+  }
 }
 run_list "recipe[krb5]"
 ```
@@ -121,17 +125,23 @@ The second example is a role for multiple Kerberos realms.
 name "krb5_multirealm"
 description "Configures Kerberos 5 Authentication for example.com and example.org realm"
 override_attributes "krb5" => {
-  "default_realm" = > "example.com",
-  "realms" => [ 
-    "example.com",
-    "example.org"
-  ],
-  "default_realm_kdcs" => [
-    "kdc1.example.com",
-    "kdc2.example.com",
-    "kdc3.example.com"
-  ],
-  "lookup_kdcs" => "true"
+  "krb5_conf" => {
+    "libdefaults" => {
+      "default_realm" => "example.com",
+      "dns_lookup_kdc" => "true"
+   },
+   "realms" => {
+      "realms" => [ 
+        "example.com",
+        "example.org"
+      ],
+      "default_realm_kdcs" => [
+        "kdc1.example.com",
+        "kdc2.example.com",
+        "kdc3.example.com"
+      ],
+    }
+  } 
 }
 run_list "recipe[krb5]"
 ```
