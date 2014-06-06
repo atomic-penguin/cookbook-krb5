@@ -150,8 +150,11 @@ License and Authors
 -------------------
 
 Author:: Eric G. Wolfe
+
 Author:: Chris Gianelloni
+
 Copyright:: 2012-2014, Eric G. Wolfe
+
 Copyright:: 2014, Continuuity, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
