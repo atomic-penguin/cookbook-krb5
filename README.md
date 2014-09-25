@@ -1,6 +1,7 @@
 krb5 Cookbook
 =============
 
+[![Cookbook Version](http://img.shields.io/cookbook/v/krb5.svg)](https://supermarket.getchef.com/cookbooks/krb5)
 [![Build Status](https://secure.travis-ci.org/atomic-penguin/cookbook-krb5.svg?branch=master)](http://travis-ci.org/atomic-penguin/cookbook-krb5)
 
 
@@ -153,9 +154,9 @@ Author:: Eric G. Wolfe
 
 Author:: Chris Gianelloni
 
-Copyright:: 2012-2014, Eric G. Wolfe
+Copyright:: © 2012-2014 Eric G. Wolfe
 
-Copyright:: 2014, Continuuity, Inc.
+Copyright:: © 2014 Cask Data, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
