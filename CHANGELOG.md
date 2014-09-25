@@ -3,6 +3,7 @@
 ## v1.0.2
 
   Update README to new attribute layout via @joraff
+  Simplify default realm configuration
 
 ## v1.0.1
 
