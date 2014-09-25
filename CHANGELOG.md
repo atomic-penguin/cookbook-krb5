@@ -1,5 +1,7 @@
 ## Unreleased
 
+## v1.0.2
+
   Update README to new attribute layout via @joraff
 
 ## v1.0.1
