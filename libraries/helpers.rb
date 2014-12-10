@@ -17,8 +17,6 @@
 # limitations under the License.
 #
 
-# require 'rkerberos'
-
 module Krb5
   # Helpers for Krb5
   module Helpers
@@ -39,8 +37,12 @@ module Krb5
     # Initialize Keytab
     #
     # @return Object
-    def keytab_init
-      Kerberos::Krb5::Keytab.new
+    def keytab_init(name = nil)
+      if name.nil?
+        Kerberos::Krb5::Keytab.new
+      else
+        Kerberos::Krb5::Keytab.new(name)
+      end
     end
 
     # Verify admin credentials are passed
@@ -69,6 +71,15 @@ module Krb5
       require 'rkerberos'
     rescue LoadError
       Chef::Log.error("Missing gem 'rkerberos'. Use the 'rkerberos_gem' recipe to install it first.")
+    end
+
+    private
+
+    # Convert array to space-separated string
+    #
+    # @result String
+    def array_to_string(array)
+      array.join(' ')
     end
   end
 end
