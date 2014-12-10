@@ -34,6 +34,11 @@ action :create do
              new_resource.password
            end
   begin
+    if new_resource.randkey
+      Chef::Log.info("Creating #{new_resource.name} principal with random key")
+    else
+      Chef::Log.info("Creating #{new_resource.name} principal with user-provided password")
+    end
     kadm5.create_principal(new_resource.principal, mypass)
     kadm5.generate_random_key(new_resource.principal) if new_resource.randkey
   ensure
@@ -45,6 +50,7 @@ action :delete do
   krb5_verify_admin
   kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
   begin
+    Chef::Log.info("Removing #{new_resource.name} principal from Kerberos")
     kadm5.delete_principal(new_resource.principal)
   ensure
     kadm5.close
