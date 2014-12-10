@@ -47,6 +47,22 @@ module Krb5
     def krb5_verify_admin
       Chef::Application.fatal!("You must specify both node['krb5']['admin_principal'] and node['krb5']['admin_password']!") if !node['krb5']['admin_principal'] || !node['krb5']['admin_password']
     end
+
+    # Acquire credentials for principal from keytab using service
+    # Parent method: #get_init_creds_keytab(principal = nil, keytab = nil, service = nil, ccache = nil)
+    # If no principal, derive from service... If no service, defaults to "host"... If no keytab, defaults to "/etc/krb5.keytab"
+    #
+    # @result Object
+    def krb5_kinit_keytab(principal, keytab)
+      Kerberos::Krb5.get_init_creds_keytab(principal, keytab)
+    end
+
+    # Acquire credentials for user using password
+    #
+    # @result Object
+    def krb5_kinit_password(user, password)
+      Kerberos::Krb5.get_init_creds_password(user, password)
+    end
   end
 end
 
