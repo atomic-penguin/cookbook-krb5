@@ -19,6 +19,7 @@
 # limitations under the License.
 #
 
+# Platform-specific configuration
 case node['platform_family']
 when 'rhel'
   default['krb5']['packages'] = %w(krb5-libs krb5-workstation pam pam_krb5 authconfig)
@@ -48,6 +49,8 @@ else
   default['krb5']['kdc']['packages'] = []
 end
 
+# TODO: deprecate these for future removal
+# Legacy attributes
 default['krb5']['default_logging'] = 'FILE:/var/log/krb5libs.log'
 default['krb5']['default_realm'] = node['domain'].upcase
 default['krb5']['realms'] = [node['domain']]
@@ -66,6 +69,9 @@ default_realm =
   else
     'LOCAL'
   end
+
+# Default location for keytabs generated from LWRP
+default['krb5']['keytabs_dir'] = '/etc/security/keytabs'
 
 # Client Packages
 default['krb5']['client']['packages'] = node['krb5']['packages']

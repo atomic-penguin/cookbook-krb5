@@ -73,6 +73,15 @@ module Krb5
       Chef::Log.error("Missing gem 'rkerberos'. Use the 'rkerberos_gem' recipe to install it first.")
     end
 
+    # Search for a principal in a keytab
+    #
+    # @result [Object, nil]
+    def keytab_find_principal(keytab, principal)
+      keytab.get_entry(principal)
+    rescue Krb5::Keytab::Exception
+      nil
+    end
+
     private
 
     # Convert array to space-separated string
