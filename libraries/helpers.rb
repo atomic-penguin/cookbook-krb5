@@ -82,6 +82,15 @@ module Krb5
       nil
     end
 
+    # Search for a principal on a KDC
+    #
+    # @result [Object, nil]
+    def kadm5_find_principal(kadm5, principal)
+      kadm5.get_principal(principal)
+    rescue PrincipalNotFoundException
+      nil
+    end
+
     private
 
     # Convert array to space-separated string
