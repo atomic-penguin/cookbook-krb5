@@ -28,7 +28,11 @@ end
 action :create do
   krb5_verify_admin
   kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
-  mypass = 'placeholder12345' if new_resource.password.nil?
+  mypass = if new_resource.password.nil?
+             'placeholder12345'
+           else
+             new_resource.password
+           end
   begin
     kadm5.create_principal(new_resource.principal, mypass)
     kadm5.generate_random_key(new_resource.principal) if new_resource.randkey
