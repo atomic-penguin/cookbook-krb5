@@ -45,9 +45,7 @@ module Krb5
 
     # Verify admin credentials are passed
     def krb5_verify_admin
-      if !node['krb5']['admin_principal'] || !node['krb5']['admin_password']
-        Chef::Application.fatal!("You must specify both node['krb5']['admin_principal'] and node['krb5']['admin_password']!")
-      end
+      Chef::Application.fatal!("You must specify both node['krb5']['admin_principal'] and node['krb5']['admin_password']!") if !node['krb5']['admin_principal'] || !node['krb5']['admin_password']
     end
   end
 end
