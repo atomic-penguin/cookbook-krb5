@@ -17,8 +17,6 @@
 # limitations under the License.
 #
 
-# require 'rkerberos'
-
 use_inline_resources if defined?(use_inline_resources)
 
 def whyrun_supported?
@@ -26,6 +24,7 @@ def whyrun_supported?
 end
 
 action :create do
+  krb5_load_gem
   krb5_verify_admin
   kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
   mypass = if new_resource.password.nil?
@@ -47,6 +46,7 @@ action :create do
 end
 
 action :delete do
+  krb5_load_gem
   krb5_verify_admin
   kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
   begin

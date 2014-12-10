@@ -63,6 +63,13 @@ module Krb5
     def krb5_kinit_password(user, password)
       Kerberos::Krb5.get_init_creds_password(user, password)
     end
+
+    # Load rkerberos gem
+    def krb5_load_gem
+      require 'rkerberos'
+    rescue LoadError
+      Chef::Log.error("Missing gem 'rkerberos'. Use the 'rkerberos_gem' recipe to install it first.")
+    end
   end
 end
 
