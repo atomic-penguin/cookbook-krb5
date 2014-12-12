@@ -79,7 +79,7 @@ module Krb5
     def keytab_find_principal(keytab, principal)
       keytab.get_entry(principal)
     rescue Krb5::Keytab::Exception
-      nil
+      return nil
     end
 
     # Search for a principal on a KDC
@@ -88,7 +88,7 @@ module Krb5
     def kadm5_find_principal(kadm5, principal)
       kadm5.get_principal(principal)
     rescue Kerberos::Kadm5::PrincipalNotFoundException
-      nil
+      return nil
     end
 
     # Converts principals array to a string
