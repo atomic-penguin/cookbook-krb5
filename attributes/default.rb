@@ -30,6 +30,7 @@ when 'rhel'
   default['krb5']['kadmin']['packages'] = %w(krb5-server)
   default['krb5']['kdc']['service_name'] = 'krb5kdc'
   default['krb5']['kdc']['packages'] = %w(krb5-server krb5-server-ldap)
+  default['krb5']['devel']['packages'] = %w(krb5-devel)
 when 'debian'
   default['krb5']['packages'] = %w(libpam-krb5 libpam-runtime libkrb5-3 krb5-user)
   default['krb5']['authconfig'] = 'pam-auth-update --package krb5'
@@ -39,6 +40,7 @@ when 'debian'
   default['krb5']['kadmin']['packages'] = %w(krb5-admin-server)
   default['krb5']['kdc']['service_name'] = 'krb5-kdc'
   default['krb5']['kdc']['packages'] = %w(krb5-kdc krb5-kdc-ldap)
+  default['krb5']['devel']['packages'] = %w(libkrb5-dev)
 when 'suse'
   default['krb5']['packages'] = %w(krb5 pam_krb5 pam-config)
   default['krb5']['authconfig'] = 'pam-config --add --krb5'
@@ -47,6 +49,7 @@ else
   default['krb5']['authconfig'] = ''
   default['krb5']['kadmin']['packages'] = []
   default['krb5']['kdc']['packages'] = []
+  default['krb5']['devel']['packages'] = []
 end
 
 # TODO: deprecate these for future removal

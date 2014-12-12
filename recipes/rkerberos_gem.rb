@@ -17,6 +17,12 @@
 # limitations under the License.
 #
 
+node['krb5']['devel']['packages'].each do |pkg|
+  package pkg do
+    action :install
+  end
+end
+
 chef_gem 'rkerberos' do
   action :install
 end
