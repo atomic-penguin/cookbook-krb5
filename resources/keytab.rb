@@ -24,4 +24,4 @@ attribute :path,       :kind_of => String,         :default => nil,    :name_att
 attribute :principals, :kind_of => Array,          :default => []
 attribute :owner,      :kind_of => String,         :default => 'root'
 attribute :group,      :kind_of => String,         :default => 'root'
-attribute :mode,       :kind_of => String,         :default => '0640'
+attribute :mode,       :kind_of => String,         :default => '0600'
