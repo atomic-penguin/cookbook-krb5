@@ -27,6 +27,7 @@ action :create do
   krb5_load_gem
   krb5_verify_admin
   kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
+  return unless kadm5_find_principal(kadm5, new_resource.name).nil?
   mypass = if new_resource.password.nil?
              'placeholder12345'
            else
@@ -49,6 +50,7 @@ action :delete do
   krb5_load_gem
   krb5_verify_admin
   kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
+  return if kadm5_find_principal(kadm5, new_resource.name).nil?
   begin
     Chef::Log.info("Removing #{new_resource.name} principal from Kerberos")
     kadm5.delete_principal(new_resource.principal)
