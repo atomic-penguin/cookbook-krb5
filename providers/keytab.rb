@@ -26,7 +26,7 @@ end
 action :create do
   krb5_load_gem
   krb5_verify_admin
-  Chef::Application.fatal!('You myst specify at least one principal') unless new_resource.principals.empty?
+  Chef::Application.fatal!('You myst specify at least one principal') if new_resource.principals.empty?
   begin
     kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
     keytab = keytab_init("FILE:#{new_resource.path}")
