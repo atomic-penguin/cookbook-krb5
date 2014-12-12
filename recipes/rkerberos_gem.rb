@@ -27,4 +27,4 @@ chef_gem 'rkerberos' do
   action :install
 end
 
-require 'rkerberos'
+require 'rkerberos' unless defined?(ChefSpec)
