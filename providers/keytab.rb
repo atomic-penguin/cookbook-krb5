@@ -39,12 +39,14 @@ action :create do
     end
 
     new_resource.principals.each do |princ|
-      kt = keytab_find_principal(keytab, princ)
+      # kt = keytab_find_principal(keytab, princ)
       sv = kadm5_find_principal(kadm5, princ)
       if sv.nil?
         Chef::Application.fatal!("Principal #{princ} not found on KDC! Perhaps, you need to create it with krb5_principal, first.")
-      elsif kt.nil?
-        Chef::Log.info("Principal #{princ} found on server but missing from keytab")
+      # elsif kt.nil?
+      #   Chef::Log.info("Principal #{princ} found on server but missing from keytab")
+      else
+        Chef::Log.info("Principal #{princ} found on server")
       end
     end
 
