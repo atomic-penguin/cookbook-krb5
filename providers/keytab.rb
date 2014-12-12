@@ -49,7 +49,7 @@ action :create do
     end
 
     execute "create-#{new_resource.path}" do
-      command "kadmin -w #{node['krb5']['admin_password']} -q 'xst -q #{new_resource.path} #{principal_list(new_resource.principals)}'"
+      command "kadmin -w #{node['krb5']['admin_password']} -q 'xst -kt #{new_resource.path} #{principal_list(new_resource.principals)}'"
       not_if "test -e #{new_resource.path}"
       action :run
     end
