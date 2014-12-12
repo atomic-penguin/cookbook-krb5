@@ -38,7 +38,7 @@ action :create do
       action :create
     end
 
-    principals.each do |princ|
+    new_resource.principals.each do |princ|
       kt = keytab_find_principal(keytab, princ)
       sv = kadm5_find_principal(kadm5, princ)
       if sv.nil?
@@ -49,7 +49,7 @@ action :create do
     end
 
     execute "create-#{new_resource.path}" do
-      command "kadmin -w #{node['krb5']['admin_password']} -q 'xst -q #{new_resource.path} #{principal_list(principals)}'"
+      command "kadmin -w #{node['krb5']['admin_password']} -q 'xst -q #{new_resource.path} #{principal_list(new_resource.principals)}'"
       not_if "test -e #{new_resource.path}"
       action :run
     end
