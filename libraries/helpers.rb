@@ -86,12 +86,7 @@ module Krb5
     #
     # @result [Object, nil]
     def kadm5_find_principal(kadm5, principal)
-      if principal =~ /@/
-        # Given principal includes realm
-        kadm5.get_principal(principal)
-      else
-        kadm5.get_principal("principal@#{krb5_default_realm}")
-      end
+      kadm5.get_principal(principal)
     rescue Kerberos::Kadm5::PrincipalNotFoundException
       return nil
     end
