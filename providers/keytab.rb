@@ -31,7 +31,7 @@ action :create do
     kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
     keytab = keytab_init("FILE:#{new_resource.path}")
 
-    directory File.dirname(new_resource.path) do
+    directory ::File.dirname(new_resource.path) do
       owner 'root'
       group 'root'
       mode '0755'
