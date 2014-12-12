@@ -86,9 +86,22 @@ module Krb5
     #
     # @result [Object, nil]
     def kadm5_find_principal(kadm5, principal)
-      kadm5.get_principal(principal)
+      if principal =~ /@/
+        # Given principal includes realm
+        kadm5.get_principal(principal)
+      else
+        kadm5.get_principal("principal@#{krb5_default_realm}")
+      end
     rescue Kerberos::Kadm5::PrincipalNotFoundException
       return nil
+    end
+
+    # Get default realm
+    #
+    # @result String
+    def krb5_default_realm
+      krb5 = krb5_init
+      krb5.get_default_realm
     end
 
     # Converts principals array to a string
