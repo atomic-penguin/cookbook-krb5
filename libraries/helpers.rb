@@ -91,6 +91,13 @@ module Krb5
       nil
     end
 
+    # Converts principals array to a string
+    #
+    # @result String
+    def principal_list(array)
+      array_to_string(array)
+    end
+
     private
 
     # Convert array to space-separated string

@@ -47,9 +47,26 @@ action :create do
         Chef::Log.info("Principal #{princ} found on server but missing from keytab")
       end
     end
+
+    execute "create-#{new_resource.path}" do
+      command "kadmin -w #{node['krb5']['admin_password']} -q 'xst -q #{new_resource.path} #{principal_list(principals)}'"
+      not_if "test -e #{new_resource.path}"
+      action :run
+    end
+
+    file new_resource.path do
+      owner new_resource.owner
+      group new_resource.group
+      mode  new_resource.mode
+      action :create
+    end
   ensure
     keytab.close
   end
+end
 
-  # keytab_dir = node['krb5']['keytabs_dir']
+action :delete do
+  file new_resource.path do
+    action :delete
+  end
 end
