@@ -26,21 +26,26 @@ end
 action :create do
   krb5_load_gem
   krb5_verify_admin
-  kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
-  return unless kadm5_find_principal(kadm5, new_resource.name).nil?
-  mypass = if new_resource.password.nil?
-             'placeholder12345'
-           else
-             new_resource.password
-           end
   begin
-    if new_resource.randkey
-      Chef::Log.info("Creating #{new_resource.name} principal with random key")
-    else
-      Chef::Log.info("Creating #{new_resource.name} principal with user-provided password")
+
+    kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
+    randkey = new_resource.randkey
+    mypass = if new_resource.password.nil?
+               'placeholder12345'
+             else
+               new_resource.password
+               randkey = false
+             end
+
+    if kadm5_find_principal(kadm5, new_resource.name).nil?
+      if randkey
+        Chef::Log.info("Creating #{new_resource.name} principal with random key")
+      else
+        Chef::Log.info("Creating #{new_resource.name} principal with user-provided password")
+      end
+      kadm5.create_principal(new_resource.principal, mypass)
+      kadm5.generate_random_key(new_resource.principal) if randkey
     end
-    kadm5.create_principal(new_resource.principal, mypass)
-    kadm5.generate_random_key(new_resource.principal) if new_resource.randkey
   ensure
     kadm5.close
   end
@@ -49,11 +54,12 @@ end
 action :delete do
   krb5_load_gem
   krb5_verify_admin
-  kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
-  return if kadm5_find_principal(kadm5, new_resource.name).nil?
   begin
-    Chef::Log.info("Removing #{new_resource.name} principal from Kerberos")
-    kadm5.delete_principal(new_resource.principal)
+    kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
+    unless kadm5_find_principal(kadm5, new_resource.name).nil?
+      Chef::Log.info("Removing #{new_resource.name} principal from Kerberos")
+      kadm5.delete_principal(new_resource.principal)
+    end
   ensure
     kadm5.close
   end
