@@ -87,7 +87,7 @@ module Krb5
     # @result [Object, nil]
     def kadm5_find_principal(kadm5, principal)
       kadm5.get_principal(principal)
-    rescue Kerberos::Krb5::PrincipalNotFoundException
+    rescue Kerberos::Kadm5::PrincipalNotFoundException
       nil
     end
 
