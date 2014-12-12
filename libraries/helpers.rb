@@ -78,7 +78,7 @@ module Krb5
     # @result [Object, nil]
     def keytab_find_principal(keytab, principal)
       keytab.get_entry(principal)
-    rescue Krb5::Keytab::Exception
+    rescue Kerberos::Krb5::Keytab::Exception
       return nil
     end
 
