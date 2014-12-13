@@ -29,12 +29,12 @@ action :create do
   begin
     kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
     randkey = new_resource.randkey
-    mypass = if new_resource.password.nil?
-               'placeholder12345'
-             else
-               new_resource.password
-               randkey = false
-             end
+    if new_resource.password.nil?
+      mypass = 'placeholder12345'
+    else
+      mypass = new_resource.password
+      randkey = false
+    end
     if kadm5_find_principal(kadm5, new_resource.name).nil?
       if randkey
         Chef::Log.info("Creating #{new_resource.name} principal with random key")
