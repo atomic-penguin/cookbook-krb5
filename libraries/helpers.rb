@@ -70,7 +70,7 @@ module Krb5
     def krb5_load_gem
       require 'rkerberos'
     rescue LoadError
-      Chef::Log.error("Missing gem 'rkerberos'. Use the 'rkerberos_gem' recipe to install it first.")
+      Chef::Application.fatal!("Missing gem 'rkerberos'. Use the 'rkerberos_gem' recipe to install it first.")
     end
 
     # Search for a principal in a keytab
