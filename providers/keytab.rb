@@ -47,13 +47,11 @@ action :create do
           Chef::Application.fatal!("Principal #{princ} not found on KDC! Perhaps, you need to create it with krb5_principal, first.")
         # elsif kt.nil?
         #   Chef::Log.info("Principal #{princ} found on server but missing from keytab")
-        else
-          Chef::Log.info("Principal #{princ} found on server")
         end
       end
 
       principals = principal_list(new_resource.principals)
-      execute "create-#{new_resource.path}" do
+      execute "create #{new_resource.path}" do
         command "kadmin -w #{node['krb5']['admin_password']} -q 'xst -kt #{new_resource.path} #{principals}'"
         not_if "test -e #{new_resource.path}"
         action :run
