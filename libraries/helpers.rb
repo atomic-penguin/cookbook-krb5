@@ -106,6 +106,11 @@ module Krb5
       array_to_string(array)
     end
 
+    # Change a principal's password
+    def kadm5_change_password(kadm5, principal, password)
+      kadm5.set_password(principal, password)
+    end
+
     private
 
     # Convert array to space-separated string
