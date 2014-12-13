@@ -43,6 +43,7 @@ action :create do
       end
       kadm5.create_principal(new_resource.name, mypass)
       kadm5.generate_random_key(new_resource.name) if randkey
+      new_resource.updated_by_last_action(true)
     end
   ensure
     kadm5.close
@@ -57,6 +58,7 @@ action :delete do
     unless kadm5_find_principal(kadm5, new_resource.name).nil?
       Chef::Log.info("Removing #{new_resource.name} principal from Kerberos")
       kadm5.delete_principal(new_resource.name)
+      new_resource.updated_by_last_action(true)
     end
   ensure
     kadm5.close
