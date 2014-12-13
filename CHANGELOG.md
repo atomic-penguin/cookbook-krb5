@@ -1,4 +1,12 @@
 ## Unreleased
+  Remove ChefSpec deprecation warnings
+
+## v1.0.4
+  Fix default realm attributes properly
+
+## v1.0.3
+  Cleanups for Rubocop
+  Switch to CentOS 6.5 in ChefSpec
 
 ## v1.0.2
 
