@@ -19,8 +19,8 @@
 
 node['krb5']['devel']['packages'].each do |pkg|
   package pkg do
-    action :install
-  end
+    action :nothing
+  end.run_action(:install)
 end
 
 chef_gem 'rkerberos' do
