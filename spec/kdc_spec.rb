@@ -41,6 +41,5 @@ describe 'krb5::kdc' do
     it 'creates kdc.conf template' do
       expect(chef_run).to create_template('/var/lib/krb5kdc/kdc.conf')
     end
-
   end
 end

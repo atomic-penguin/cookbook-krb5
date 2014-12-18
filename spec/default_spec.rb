@@ -31,7 +31,6 @@ describe 'krb5::default' do
     it 'executes execute[krb5-authconfig] block' do
       expect(chef_run).not_to run_execute('krb5-authconfig')
     end
-
   end
 
   context 'on Ubuntu 13.04' do

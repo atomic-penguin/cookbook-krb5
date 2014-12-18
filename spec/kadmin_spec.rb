@@ -25,7 +25,6 @@ describe 'krb5::kadmin' do
         /\*\/admin@EXAMPLE.COM\t\*/
       )
     end
-
   end
 
   context 'on Ubuntu 13.04' do

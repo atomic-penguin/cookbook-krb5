@@ -15,7 +15,6 @@ describe 'krb5::rkerberos_gem' do
     it 'installs krb5-devel package' do
       expect(chef_run).to install_package('krb5-devel')
     end
-
   end
 
   context 'on Ubuntu 13.04' do
