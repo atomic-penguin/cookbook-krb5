@@ -31,6 +31,7 @@ action :create do
     kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
     keytab = keytab_init("FILE:#{new_resource.path}")
 
+    # Should we use @current_resource.exists here instead?
     unless ::File.exist?(new_resource.path)
 
       directory ::File.dirname(new_resource.path) do
