@@ -42,7 +42,7 @@ action :create do
       new_resource.principals.each do |princ|
         sv = kadm5_find_principal(kadm5, princ)
         next unless sv.nil?
-        Chef::Application.fatal!("Principal #{princ} not found on KDC! Perhaps, you need to create it with krb5_principal, first.")
+        Chef::Application.fatal!("Principal #{princ} not found on KDC! Perhaps you need to create it with krb5_principal, first.")
       end
 
       principals = principal_list(new_resource.principals)
