@@ -21,7 +21,7 @@ actions :create, :delete
 default_action :create
 
 attribute :path,       :kind_of => String,         :default => nil,    :name_attribute => true
-attribute :principals, :kind_of => Array,          :default => []
+attribute :principals, :kind_of => Array,          :default => [],     :required => true
 attribute :owner,      :kind_of => String,         :default => 'root'
 attribute :group,      :kind_of => String,         :default => 'root'
 attribute :mode,       :kind_of => String,         :default => '0600'
