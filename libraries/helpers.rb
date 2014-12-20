@@ -121,7 +121,3 @@ module Krb5
     end
   end
 end
-
-Chef::Recipe.send(:include, ::Krb5::Helpers)
-Chef::Resource.send(:include, ::Krb5::Helpers)
-Chef::Provider.send(:include, ::Krb5::Helpers)
