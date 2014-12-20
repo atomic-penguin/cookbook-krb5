@@ -19,9 +19,7 @@
 
 use_inline_resources if defined?(use_inline_resources)
 
-def whyrun_supported?
-  true
-end
+# TODO: guards for whyrun_supported?
 
 action :create do
   krb5_load_gem
