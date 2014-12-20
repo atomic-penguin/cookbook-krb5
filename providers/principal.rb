@@ -34,11 +34,7 @@ action :create do
       randkey = false
     end
     if kadm5_find_principal(kadm5, new_resource.name).nil?
-      if randkey
-        Chef::Log.info("Creating #{new_resource.name} principal with random key")
-      else
-        Chef::Log.info("Creating #{new_resource.name} principal with user-provided password")
-      end
+      Chef::Log.info("Creating #{new_resource.name} principal with #{randkey ? 'random key' : 'user-provided password'}")
       kadm5.create_principal(new_resource.name, mypass)
       kadm5.generate_random_key(new_resource.name) if randkey
       new_resource.updated_by_last_action(true)
