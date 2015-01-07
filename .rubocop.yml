@@ -1,3 +1,6 @@
+AllCops:
+  Exclude:
+    - vendor/bundle/**/*
 Encoding:
   Enabled: False
 LineLength:
