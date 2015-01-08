@@ -65,7 +65,7 @@ default['krb5']['forwardable'] = 'true'
 
 default_realm =
   if node['krb5'].key?('krb5_conf') && node['krb5']['krb5_conf'].key?('libdefaults') &&
-     node['krb5']['krb5_conf']['libdefaults'].key?('default_realm')
+    node['krb5']['krb5_conf']['libdefaults'].key?('default_realm')
     node['krb5']['krb5_conf']['libdefaults']['default_realm'].upcase
   elsif node['krb5']['default_realm']
     node['krb5']['default_realm'].upcase
@@ -96,6 +96,8 @@ default['krb5']['krb5_conf']['libdefaults']['ticket_lifetime'] = node['krb5']['t
 # realms
 default['krb5']['krb5_conf']['realms']['default_realm'] = node['krb5']['krb5_conf']['libdefaults']['default_realm']
 default['krb5']['krb5_conf']['realms']['default_realm_kdcs'] = node['krb5']['default_realm_kdcs']
+default['krb5']['krb5_conf']['realms']['default_realm_kdcs_dns'] = false
+default['krb5']['krb5_conf']['realms']['default_realm_kdcs_default_domain'] = '' 
 default['krb5']['krb5_conf']['realms']['default_realm_admin_server'] = ''
 default['krb5']['krb5_conf']['realms']['realms'] = node['krb5']['realms']
 
