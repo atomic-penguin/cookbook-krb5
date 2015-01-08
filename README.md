@@ -53,6 +53,8 @@ This cookbook has changed the attribute format, but is backwards compatible with
 
  * `krb5['krb5_conf']['realms']['default_realm']` - The default realm, defaults to `krb5['krb5_conf']['libdefaults']['default_realm']`
  * `krb5['krb5_conf']['realms']['default_realm_kdcs']` - Array of Kerberos servers for default realm.  Default is empty.
+ * `krb5['krb5_conf']['realms']['default_realm_kdcs_dns']` - Boolean, (true | false) use DNS as opposed to specifying kdc. Will not write kdc= if true, will use DNS.
+ * `krb5['krb5_conf']['realms']['default_realm_kdcs_default_domain']` - If set writed default domain - primarily for krb4 compatibility..
  * `krb5['krb5_conf']['realms']['default_realm_admin_server']` - Address of Kerberos admin server.  Defaults to empty.
  * `krb5['krb5_conf']['realms']['realms']` - Array of all realms, including the default.  Defaults to OHAI's domain attribute.
 
