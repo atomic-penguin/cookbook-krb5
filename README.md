@@ -29,7 +29,11 @@ clocks, change the metadata according to your needs.
 Attributes
 ----------
 
-This cookbook has changed the attribute format, but is backwards compatible with `0.2.0` attributes. The new format used for template variables consists of `krb5[file][section][key] = 'value'` where file is one of `krb5_conf`, `kadm5_acl`, or `kdc_conf`.
+This cookbook has changed the attribute format and is no longer compatible
+with older versions. If you wish to use the older syntax, pin your version
+to `< 2.0` or switch to the new syntax.
+
+The new format used for template variables consists of `krb5[file][section][key] = 'value'` where file is one of `krb5_conf`, `kadm5_acl`, or `kdc_conf`.
 
 ## Client / Libs
 
