@@ -1,3 +1,7 @@
+## v2.0.0
+  Remove deprecated attribute support
+  Remove testing vendored gems via rubocop
+
 ## v1.1.0
   Remove ChefSpec deprecation warnings
   Use container-based Travis CI infrastructure
