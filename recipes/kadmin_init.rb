@@ -31,9 +31,11 @@ end
 execute 'create-krb5-db' do
   command "echo '#{node['krb5']['master_password']}\n#{node['krb5']['master_password']}\n' | kdb5_util -r #{default_realm} create -s"
   not_if "test -e #{node['krb5']['kdc_conf']['realms'][default_realm]['database_name']}"
+  sensitive true
 end
 
 execute 'create-admin-principal' do
   command "echo '#{node['krb5']['admin_password']}\n#{node['krb5']['admin_password']}\n' | kadmin.local -q 'addprinc #{node['krb5']['admin_principal']}'"
   not_if "kadmin.local -q 'list_principals' | grep -e ^#{node['krb5']['admin_principal']}"
+  sensitive true
 end
