@@ -25,6 +25,7 @@ end
 
 chef_gem 'rkerberos' do
   action :install
+  compile_time true if respond_to?(:compile_time)
 end
 
 require 'rkerberos' unless defined?(ChefSpec)
