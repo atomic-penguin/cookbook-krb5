@@ -1,3 +1,6 @@
+## Unreleased
+  Make execute block sensitive
+
 ## v2.0.0
   Remove deprecated attribute support
   Remove testing vendored gems via rubocop
