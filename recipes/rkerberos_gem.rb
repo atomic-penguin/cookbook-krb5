@@ -23,8 +23,9 @@ node['krb5']['devel']['packages'].each do |pkg|
   end.run_action(:install)
 end
 
-chef_gem 'rkerberos' do
+chef_gem 'rkerberos' do # ~FC009
   action :install
+  compile_time true if respond_to?(:compile_time)
 end
 
 require 'rkerberos' unless defined?(ChefSpec)
