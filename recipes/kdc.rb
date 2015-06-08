@@ -31,5 +31,3 @@ template "#{node['krb5']['data_dir']}/kdc.conf" do
   mode '0644'
   variables node['krb5']['kdc_conf']
 end
-
-include_recipe 'krb5::kdc_service'
