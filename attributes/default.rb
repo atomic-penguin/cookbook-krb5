@@ -65,6 +65,9 @@ default_realm =
 # Default location for keytabs generated from LWRP
 default['krb5']['keytabs_dir'] = '/etc/security/keytabs'
 
+# Install build-essential at compile time
+override['build-essential']['compile_time'] = true
+
 # Client Packages
 default['krb5']['client']['packages'] = node['krb5']['packages']
 default['krb5']['client']['authconfig'] = node['krb5']['authconfig']
