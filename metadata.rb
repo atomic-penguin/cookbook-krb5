@@ -10,4 +10,5 @@ version          '2.0.0'
   supports os
 end
 
+depends 'build-essential'
 depends 'ntp'
