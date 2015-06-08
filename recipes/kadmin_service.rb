@@ -22,5 +22,5 @@ include_recipe 'krb5::kadmin'
 
 service 'krb5-admin-server' do
   service_name node['krb5']['kadmin']['service_name']
-  action :nothing
+  action node['krb5']['kadmin']['service_actions']
 end

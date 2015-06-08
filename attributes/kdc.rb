@@ -2,7 +2,7 @@
 # Cookbook Name:: krb5
 # Attributes:: kdc
 #
-# Copyright © 2014 Cask Data, Inc.
+# Copyright © 2014-2015 Cask Data, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,3 +28,6 @@ default['krb5']['kdc_conf']['realms'][default_realm]['acl_file'] = "#{node['krb5
 default['krb5']['kdc_conf']['realms'][default_realm]['admin_keytab'] = "FILE:#{node['krb5']['conf_dir']}/kadm5.keytab"
 default['krb5']['kdc_conf']['realms'][default_realm]['database_name'] = "#{node['krb5']['data_dir']}/principal"
 default['krb5']['kdc_conf']['realms'][default_realm]['key_stash_file'] = "#{node['krb5']['data_dir']}/.k5.#{default_realm}"
+
+# Service
+default['krb5']['kdc']['service_actions'] = [:nothing]

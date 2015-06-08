@@ -22,5 +22,5 @@ include_recipe 'krb5::kdc'
 
 service 'krb5-kdc' do
   service_name node['krb5']['kdc']['service_name']
-  action :nothing
+  action node['krb5']['kdc']['service_actions']
 end
