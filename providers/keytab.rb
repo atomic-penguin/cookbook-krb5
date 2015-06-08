@@ -59,7 +59,7 @@ action :create do
       end
     end
   ensure
-    keytab.close
+    keytab.close unless keytab.nil?
   end
 end
 
