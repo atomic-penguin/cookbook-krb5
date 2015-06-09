@@ -1,5 +1,8 @@
 ## Unreleased
   Make execute block sensitive
+  Authconfig Execute w/ Test via @joerocklin
+  Only use compile_time on chef_gem when defined
+  Only use sensitive on execute when defined
 
 ## v2.0.0
   Remove deprecated attribute support
