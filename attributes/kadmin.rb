@@ -2,7 +2,7 @@
 # Cookbook Name:: krb5
 # Attributes:: kadmin
 #
-# Copyright © 2014 Cask Data, Inc.
+# Copyright © 2014-2015 Cask Data, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,3 +28,6 @@ default['krb5']['admin_password'] = 'password'
 default['krb5']['kadm5_acl'] = {
   "*/admin@#{node['krb5']['krb5_conf']['libdefaults']['default_realm'].upcase}" => ['*']
 }
+
+# Service
+default['krb5']['kadmin']['service_actions'] = [:nothing]
