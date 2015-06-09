@@ -40,7 +40,7 @@ action :create do
       new_resource.updated_by_last_action(true)
     end
   ensure
-    kadm5.close
+    kadm5.close unless kadm5.nil?
   end
 end
 
@@ -55,6 +55,6 @@ action :delete do
       new_resource.updated_by_last_action(true)
     end
   ensure
-    kadm5.close
+    kadm5.close unless kadm5.nil?
   end
 end
