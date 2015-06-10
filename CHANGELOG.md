@@ -1,8 +1,13 @@
 ## Unreleased
+
+## v2.0.1
   Make execute block sensitive
   Authconfig Execute w/ Test via @joerocklin
   Only use compile_time on chef_gem when defined
   Only use sensitive on execute when defined
+  Control expected service state via attribute
+  Only close rkerberos objects when defined
+  Install build dependencies for rkerberos gem
 
 ## v2.0.0
   Remove deprecated attribute support
