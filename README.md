@@ -23,7 +23,7 @@ Which should configure PAM to use Kerberos on other systems.
 
 You really need to have time synchronized within 5 minutes of your domain
 controllers, or key distribution centers.  Therefore the recipe depends
-on the Opscode NTP cookbook.  If you have another method of keeping accurate
+on the Chef NTP cookbook.  If you have another method of keeping accurate
 clocks, change the metadata according to your needs.
 
 Attributes
@@ -39,6 +39,10 @@ The new format used for template variables consists of `krb5[file][section][key]
 
  * `krb5['client']['packages']` - Packages and libraries needed for Kerberos v5 authentication, detected for Redhat/Debian family systems.
  * `krb5['client']['authconfig']` - Configuration script for PAM, detected for RedHat and Debian family systems.
+
+### Section: includedir
+
+ * `krb5['krb5_conf']['includedir']` - Array of directories to include, in order.  Default is empty.
 
 ### Section: logging
 

@@ -91,6 +91,9 @@ default['krb5']['krb5_conf']['realms']['default_realm_kdcs'] = []
 default['krb5']['krb5_conf']['realms']['default_realm_admin_server'] = ''
 default['krb5']['krb5_conf']['realms']['realms'] = [default_realm]
 
+# includedir
+default['krb5']['krb5_conf']['includedir'] = []
+
 # appdefaults
 default['krb5']['krb5_conf']['appdefaults']['pam']['debug'] = false
 default['krb5']['krb5_conf']['appdefaults']['pam']['forwardable'] = node['krb5']['krb5_conf']['libdefaults']['forwardable']
