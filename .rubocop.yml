@@ -7,7 +7,7 @@ LineLength:
   Max: 200
 HashSyntax:
   Enabled: False
-SingleSpaceBeforeFirstArg:
+SpaceBeforeFirstArg:
   Enabled: false
 AsciiComments:
   Enabled: false
