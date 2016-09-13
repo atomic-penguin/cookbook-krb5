@@ -1,5 +1,11 @@
 ## Unreleased
 
+## v2.0.2
+  Remove default from name_property for GitHub issue #26
+  The execute[create-krb5-db] resource creates the DB file
+  Update Gem/cookbook restrictions and rubocop configuration
+  Support includedir directive
+
 ## v2.0.1
   Make execute block sensitive
   Authconfig Execute w/ Test via @joerocklin
