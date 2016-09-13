@@ -32,6 +32,7 @@ execute 'create-krb5-db' do # ~FC009
   command "echo '#{node['krb5']['master_password']}\n#{node['krb5']['master_password']}\n' | kdb5_util -r #{default_realm} create -s"
   not_if "test -e #{node['krb5']['kdc_conf']['realms'][default_realm]['database_name']}"
   sensitive true if respond_to?(:sensitive)
+  creates node['krb5']['kdc_conf']['realms'][default_realm]['database_name']
 end
 
 execute 'create-admin-principal' do
