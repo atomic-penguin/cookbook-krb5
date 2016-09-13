@@ -20,6 +20,6 @@
 actions :create, :delete
 default_action :create
 
-attribute :principal, :kind_of => String,         :default => nil, :name_attribute => true
+attribute :principal, :kind_of => String,         :name_attribute => true
 attribute :randkey,   :equal_to => [true, false], :default => true
 attribute :password,  :kind_of => String,         :default => nil
