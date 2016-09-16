@@ -4,7 +4,7 @@
 #
 # Copyright © 2012 Eric G. Wolfe
 # Copyright © 2013 Gerald L. Hevener Jr., M.S.
-# Copyright © 2014-2015 Cask Data, Inc.
+# Copyright © 2014-2016 Cask Data, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,6 +67,9 @@ default['krb5']['keytabs_dir'] = '/etc/security/keytabs'
 
 # Install build-essential at compile time
 override['build-essential']['compile_time'] = true
+
+# Include ntp recipe?
+default['krb5']['include_ntp'] = true
 
 # Client Packages
 default['krb5']['client']['packages'] = node['krb5']['packages']
