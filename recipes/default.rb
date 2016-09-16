@@ -4,7 +4,7 @@
 #
 # Copyright © 2012 Eric G. Wolfe
 # Copyright © 2013 Gerald L. Hevener Jr., M.S.
-# Copyright © 2014 Cask Data, Inc.
+# Copyright © 2014-2016 Cask Data, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+include_recipe 'ntp::default' unless node['krb5']['include_ntp'].to_s == 'false'
 
 node['krb5']['client']['packages'].each do |krb5_package|
   package krb5_package
