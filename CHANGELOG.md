@@ -1,5 +1,9 @@
 ## Unreleased
 
+## v2.1.0
+  Include ntp::default in default recipe
+  Remove extra whitespace to appease the almighty Rubocop
+
 ## v2.0.2
   Remove default from name_property for GitHub issue #26
   The execute[create-krb5-db] resource creates the DB file
