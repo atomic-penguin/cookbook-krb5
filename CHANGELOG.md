@@ -1,5 +1,8 @@
 ## Unreleased
 
+## v2.2.0
+  Before creating keytab, kinit as admin user
+
 ## v2.1.0
   Include ntp::default in default recipe
   Remove extra whitespace to appease the almighty Rubocop
