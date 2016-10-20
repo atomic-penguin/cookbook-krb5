@@ -16,14 +16,6 @@ task :rubocop do
   sh 'rubocop --fail-level E'
 end
 
-# test-kitchen task
-begin
-  require 'kitchen/rake_tasks'
-  Kitchen::RakeTasks.new
-rescue LoadError
-  puts '>>>>> Kitchen gem not loaded, omitting tasks' unless ENV['CI']
-end
-
 # Deploy task
 desc 'Deploy to chef server and pin to environment'
 task :deploy do

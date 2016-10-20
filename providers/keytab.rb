@@ -2,7 +2,7 @@
 # Cookbook Name:: krb5
 # Provider:: keytab
 #
-# Copyright © 2014 Cask Data, Inc.
+# Copyright © 2014-2016 Cask Data, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,10 +45,20 @@ action :create do
       end
 
       principals = principal_list(new_resource.principals)
-      execute "create #{new_resource.path}" do
+
+      execute 'kinit as configured admin principal' do # ~FC009
+        command "echo #{node['krb5']['admin_password']} | kinit #{node['krb5']['admin_principal']}"
+        not_if "test -e #{new_resource.path}"
+        action :run
+        sensitive true if respond_to?(:sensitive)
+      end
+
+      execute "create #{new_resource.path}" do # ~FC009
         command "kadmin -w #{node['krb5']['admin_password']} -q 'xst -kt #{new_resource.path} #{principals}'"
         not_if "test -e #{new_resource.path}"
         action :run
+        creates new_resource.path
+        sensitive trueif respond_to?(:sensitive)
       end
 
       file new_resource.path do
