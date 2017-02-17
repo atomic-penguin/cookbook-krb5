@@ -58,7 +58,7 @@ action :create do
         not_if "test -e #{new_resource.path}"
         action :run
         creates new_resource.path
-        sensitive trueif respond_to?(:sensitive)
+        sensitive true if respond_to?(:sensitive)
       end
 
       file new_resource.path do
