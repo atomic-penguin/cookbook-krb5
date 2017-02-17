@@ -1,5 +1,9 @@
 ## Unreleased
 
+## v2.2.1
+  Fix typo is guard around senstive in krb5_keytab
+  Update testing framework (Gemfile/Berksfile)
+
 ## v2.2.0
   Before creating keytab, kinit as admin user
 
