@@ -4,8 +4,8 @@ engines:
     enabled: true
     config:
       languages:
-      - ruby
-        #mass_threshold: 20
+        ruby:
+          mass_threshold: 20
   fixme:
     enabled: true
   foodcritic:
