@@ -8,20 +8,24 @@ provisioner:
 
 verifier:
   name: inspec
-  inspec_tests:
-    - test/integration/default
 
 platforms:
   - name: ubuntu-14.04
   - name: ubuntu-16.04
-  - name: centos-6.6
-  - name: centos-7
-  - name: centos-7.1
+  - name: centos-6.9
+  - name: centos-7.4
+
 suites:
   - name: default
+    inspec_tests:
+      - test/integration/default
     run_list:
       - recipe[krb5::default]
   - name: kadmin
+    verifier:
+    inspec_tests:
+      - test/integration/default
+      - test/integration/service
     run_list:
       - recipe[krb5::kadmin_init]
       - recipe[krb5::kadmin_service]
@@ -36,5 +40,8 @@ suites:
         realms:
           default_realm_admin_server: localhost
   - name: rkerberos
+    verifier:
+    inspec_tests:
+      - test/integration/rkerberos
     run_list:
       - recipe[krb5::rkerberos_gem]
