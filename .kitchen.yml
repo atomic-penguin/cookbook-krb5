@@ -21,10 +21,8 @@ suites:
       - test/integration/default
     run_list:
       - recipe[krb5::default]
-  - name: kadmin
-    verifier:
+  - name: service
     inspec_tests:
-      - test/integration/default
       - test/integration/service
     run_list:
       - recipe[krb5::kadmin_init]
@@ -40,7 +38,6 @@ suites:
         realms:
           default_realm_admin_server: localhost
   - name: rkerberos
-    verifier:
     inspec_tests:
       - test/integration/rkerberos
     run_list:
