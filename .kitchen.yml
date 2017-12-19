@@ -6,16 +6,23 @@ provisioner:
   name: chef_zero
   always_update_cookbooks: true
 
+verifier:
+  name: inspec
+  inspec_tests:
+  - test/smoke/default
+  - test/integration/default/serverspec
+
 platforms:
-- name: centos-6.6
-- name: centos-7.1
-- name: ubuntu-16.04
+  - name: ubuntu-14.04
+  - name: ubuntu-16.04
+  - name: centos-6.6
+  - name: centos-7
+  - name: centos-7.1
 
 suites:
 - name: default
   run_list:
   - recipe[krb5]
-
 - name: kadmin
   run_list:
   - recipe[krb5::kadmin_init]
