@@ -10,7 +10,7 @@ verifier:
   name: inspec
   inspec_tests:
   - test/smoke/default
-  - test/integration/default/serverspec
+  # - test/integration/default/serverspec
 
 platforms:
   - name: ubuntu-14.04
