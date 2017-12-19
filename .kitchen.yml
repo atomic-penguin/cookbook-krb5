@@ -31,9 +31,13 @@ suites:
     attributes:
       krb5:
         kadmin:
-          service_actions: start
+          service_actions:
+            - start
+            - enable
         kdc:
-          service_actions: start
+          service_actions:
+            - start
+            - enable
       krb5_conf:
         realms:
           default_realm_admin_server: localhost
