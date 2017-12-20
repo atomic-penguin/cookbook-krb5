@@ -75,24 +75,24 @@ Vagrant.configure('2') do |config|
       :mysql => {
         :server_root_password => 'rootpass',
         :server_debian_password => 'debpass',
-        :server_repl_password => 'replpass'
+        :server_repl_password => 'replpass',
       },
       :java => {
         :install_flavor => 'oracle',
         :jdk_version => '6',
         :oracle => {
-          :accept_oracle_download_terms => true
-        }
+          :accept_oracle_download_terms => true,
+        },
       },
       :krb5 => {
         :default_realm_kdcs => ['localhost'],
-        :default_realm_admin_server => 'localhost'
-      }
+        :default_realm_admin_server => 'localhost',
+      },
     }
 
     chef.run_list = [
       'recipe[krb5::default]',
-      'recipe[krb5::kadmin]'
+      'recipe[krb5::kadmin]',
     ]
   end
 end

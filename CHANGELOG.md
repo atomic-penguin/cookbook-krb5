@@ -1,4 +1,10 @@
-## Unreleased
+## v2.3.0
+  Implement apt cookbook and updating the repo cache at compile time to support
+  the build-essential cookbook on Ubuntu
+  Update testing for currently supported Ubuntu versions (14.04, 16.04)
+  Add more unit and smoke tests - use InSpec instead of ServerSpec
+  Add `:enable` action to kitchen 'service' suite
+  Linting and Foodcritic updates - implement `converge_by`
 
 ## v2.2.1
   Fix typo is guard around senstive in krb5_keytab

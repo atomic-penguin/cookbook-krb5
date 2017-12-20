@@ -3,22 +3,46 @@ driver:
   name: vagrant
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
+  always_update_cookbooks: true
+
+verifier:
+  name: inspec
 
 platforms:
-- name: centos-6.6
-- name: centos-7.1
+  - name: ubuntu-14.04
+  - name: ubuntu-16.04
+  - name: centos-6.9
+  - name: centos-7.4
 
 suites:
-- name: default
-  run_list:
-  - recipe[krb5]
-- name: kadmin
-  run_list:
-  - recipe[krb5::kadmin_init]
-  - recipe[krb5::kadmin_service]
-  - recipe[krb5::kdc_service]
-  attributes: { krb5: { kadmin: { service_actions: 'start' }, kdc: { service_actions: 'start' } }, krb5_conf: { realms: { default_realm_admin_server: 'localhost' } } }
-- name: rkerberos
-  run_list:
-  - recipe[krb5::rkerberos_gem]
+  - name: default
+    inspec_tests:
+      - test/integration/default
+    run_list:
+      - recipe[krb5::default]
+  - name: service
+    inspec_tests:
+      - test/integration/service
+    run_list:
+      - recipe[krb5::kadmin_init]
+      - recipe[krb5::kadmin_service]
+      - recipe[krb5::kdc_service]
+    attributes:
+      krb5:
+        kadmin:
+          service_actions:
+            - start
+            - enable
+        kdc:
+          service_actions:
+            - start
+            - enable
+      krb5_conf:
+        realms:
+          default_realm_admin_server: localhost
+  - name: rkerberos
+    inspec_tests:
+      - test/integration/rkerberos
+    run_list:
+      - recipe[krb5::rkerberos_gem]

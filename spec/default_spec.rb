@@ -1,19 +1,27 @@
 require 'spec_helper'
 
 describe 'krb5::default' do
-  context 'on Centos 6.5 x86_64' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'centos', version: 6.5) do |node|
-        node.automatic['domain'] = 'example.com'
-      end.converge(described_recipe)
-    end
+  include_context 'converged default recipe'
 
-    %w(krb5-libs krb5-workstation pam pam_krb5 authconfig).each do |krb5_pkg|
-      it "installs #{krb5_pkg} package" do
-        expect(chef_run).to install_package(krb5_pkg)
+  let(:krb5_centos_packages) { %w(krb5-libs krb5-workstation pam pam_krb5 authconfig) }
+  shared_examples 'CentOS packages for kerberos' do
+    it 'installs necessary packages for CentOS distros' do
+      krb5_centos_packages.each do |package|
+        expect(chef_run).to install_package(package)
       end
     end
+  end
 
+  let(:krb5_ubuntu_packages) { %w(libpam-krb5 libpam-runtime libkrb5-3 krb5-user) }
+  shared_examples 'Ubuntu packages for kerberos' do
+    it 'installs necessary packages for Ubuntu distros' do
+      krb5_ubuntu_packages.each do |package|
+        expect(chef_run).to install_package(package)
+      end
+    end
+  end
+
+  shared_examples 'kerberos configuration' do
     it 'creates the /etc/krb5kdc directory' do
       expect(chef_run).to create_directory('/etc/krb5kdc')
     end
@@ -23,9 +31,7 @@ describe 'krb5::default' do
     end
 
     it 'renders file krb5.conf with realm EXAMPLE.COM' do
-      expect(chef_run).to render_file('/etc/krb5.conf').with_content(
-        /default_realm\s+=\s+EXAMPLE.COM/
-      )
+      expect(chef_run).to render_file('/etc/krb5.conf').with_content(/default_realm\s+=\s+EXAMPLE.COM/)
     end
 
     it 'executes execute[krb5-authconfig] block' do
@@ -33,17 +39,35 @@ describe 'krb5::default' do
     end
   end
 
-  context 'on Ubuntu 13.04' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: 13.04) do |node|
-        node.automatic['domain'] = 'example.com'
-      end.converge(described_recipe)
+  context 'CentOS 6.9' do
+    let(:node_attributes) do
+      { platform: 'centos', version: '6.9', platform_family: 'rhel' }
     end
+    it_behaves_like 'CentOS packages for kerberos'
+    it_behaves_like 'kerberos configuration'
+  end
 
-    %w(libpam-krb5 libpam-runtime libkrb5-3 krb5-user).each do |krb5_pkg|
-      it "installs #{krb5_pkg} package" do
-        expect(chef_run).to install_package(krb5_pkg)
-      end
+  context 'CentOS 7.4' do
+    let(:node_attributes) do
+      { platform: 'centos', version: '7.4.1708', platform_family: 'rhel' }
     end
+    it_behaves_like 'CentOS packages for kerberos'
+    it_behaves_like 'kerberos configuration'
+  end
+
+  context 'Ubuntu 14.04' do
+    let(:node_attributes) do
+      { platform: 'ubuntu', version: '14.04', platform_family: 'debian' }
+    end
+    it_behaves_like 'Ubuntu packages for kerberos'
+    it_behaves_like 'kerberos configuration'
+  end
+
+  context 'Ubuntu 16.04' do
+    let(:node_attributes) do
+      { platform: 'ubuntu', version: '16.04', platform_family: 'debian' }
+    end
+    it_behaves_like 'Ubuntu packages for kerberos'
+    it_behaves_like 'kerberos configuration'
   end
 end

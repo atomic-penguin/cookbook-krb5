@@ -65,8 +65,9 @@ default_realm =
 # Default location for keytabs generated from LWRP
 default['krb5']['keytabs_dir'] = '/etc/security/keytabs'
 
-# Install build-essential at compile time
-override['build-essential']['compile_time'] = true
+# Update apt repos and install build-essential at compile time
+node.override['apt']['compile_time_update'] = true
+node.override['build-essential']['compile_time'] = true
 
 # Include ntp recipe?
 default['krb5']['include_ntp'] = true
