@@ -31,3 +31,4 @@ default['krb5']['kdc_conf']['realms'][default_realm]['key_stash_file'] = "#{node
 
 # Service
 default['krb5']['kdc']['service_actions'] = [:nothing]
+default['krb5']['kprop']['service_actions'] = [:nothing]

@@ -24,3 +24,8 @@ service 'krb5-kdc' do
   service_name node['krb5']['kdc']['service_name']
   action node['krb5']['kdc']['service_actions']
 end
+
+service 'kprop' do
+  service_name node['krb5']['kprop']['service_name']
+  action node['krb5']['kprop']['service_actions']
+end
