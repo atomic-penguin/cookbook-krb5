@@ -26,7 +26,7 @@ default['krb5']['admin_password'] = 'password'
 
 # kadm5.acl
 default['krb5']['kadm5_acl'] = {
-  "*/admin@#{node['krb5']['krb5_conf']['libdefaults']['default_realm'].upcase}" => ['*']
+  "*/admin@#{node['krb5']['krb5_conf']['libdefaults']['default_realm'].upcase}" => ['*'],
 }
 
 # Service

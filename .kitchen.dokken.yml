@@ -1,0 +1,34 @@
+driver:
+  name: dokken
+  privileged: true # because Docker, systemd, and sysctl
+  chef_version: <%= ENV['CHEF_VERSION'] || 'current' %>
+
+transport:
+  name: dokken
+
+provisioner:
+  name: dokken
+  deprecations_as_errors: true
+
+platforms:
+- name: centos-7
+  driver:
+    image: dokken/centos-7
+    pid_one_command: /usr/lib/systemd/systemd
+    # This is needed because dcos-spartan.service does "modprobe dummy"
+    volumes:
+    - /lib/modules:/lib/modules:ro
+
+suites:
+  - name: default
+    run_list:
+    - recipe[krb5]
+  - name: kadmin
+    run_list:
+    - recipe[krb5::kadmin_init]
+    - recipe[krb5::kadmin_service]
+    - recipe[krb5::kdc_service]
+    attributes: { krb5: { kadmin: { service_actions: 'start' }, kdc: { service_actions: 'start' } }, krb5_conf: { realms: { default_realm_admin_server: 'localhost' } } }
+  - name: rkerberos
+    run_list:
+    - recipe[krb5::rkerberos_gem]
