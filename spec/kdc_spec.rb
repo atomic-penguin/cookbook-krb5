@@ -25,9 +25,9 @@ describe 'krb5::kdc' do
     end
   end
 
-  context 'on Ubuntu 13.04' do
+  context 'on Ubuntu 14.04' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: 13.04) do |node|
+      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: 14.04) do |node|
         node.automatic['domain'] = 'example.com'
       end.converge(described_recipe)
     end

@@ -27,9 +27,9 @@ describe 'krb5::kadmin' do
     end
   end
 
-  context 'on Ubuntu 13.04' do
+  context 'on Ubuntu 14.04' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: 13.04) do |node|
+      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: 14.04) do |node|
         node.automatic['domain'] = 'example.com'
         stub_command('test -e /var/lib/krb5kdc/principal').and_return(false)
         stub_command("kadmin.local -q 'list_principals' | grep -e ^admin/admin").and_return(false)
