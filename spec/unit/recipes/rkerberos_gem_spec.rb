@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe 'krb5::rkerberos_gem' do
-  context 'on Centos 6.5 x86_64' do
+  context 'on Centos 6.7 x86_64' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'centos', version: 6.5) do |node|
+      ChefSpec::SoloRunner.new(platform: 'centos', version: 6.7) do |node|
         node.automatic['domain'] = 'example.com'
       end.converge(described_recipe)
     end

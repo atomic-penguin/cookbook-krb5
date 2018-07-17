@@ -78,8 +78,6 @@ module Krb5
     # @result [Object, nil]
     def keytab_find_principal(keytab, principal)
       keytab.get_entry(principal)
-    rescue Kerberos::Krb5::Keytab::Exception
-      return nil
     end
 
     # Search for a principal on a KDC
@@ -87,8 +85,6 @@ module Krb5
     # @result [Object, nil]
     def kadm5_find_principal(kadm5, principal)
       kadm5.get_principal(principal)
-    rescue Kerberos::Kadm5::PrincipalNotFoundException
-      return nil
     end
 
     # Get default realm

@@ -3,6 +3,7 @@
 # Provider:: keytab
 #
 # Copyright © 2014-2016 Cask Data, Inc.
+# Copyright © 2018 Chris Gianelloni
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +18,7 @@
 # limitations under the License.
 #
 
-use_inline_resources if defined?(use_inline_resources)
+use_inline_resources if defined?(use_inline_resources) # ~FC113
 include Krb5::Helpers
 # TODO: guards for whyrun_supported?
 

@@ -3,6 +3,7 @@
 # Provider:: principal
 #
 # Copyright © 2014 Cask Data, Inc.
+# Copyright © 2018 Chris Gianelloni
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +18,7 @@
 # limitations under the License.
 #
 
-use_inline_resources if defined?(use_inline_resources)
+use_inline_resources if defined?(use_inline_resources) # ~FC113
 include Krb5::Helpers
 # TODO: guards for whyrun_supported?
 
@@ -35,9 +36,10 @@ action :create do
     end
     if kadm5_find_principal(kadm5, new_resource.name).nil?
       Chef::Log.info("Creating #{new_resource.name} principal with #{randkey ? 'random key' : 'user-provided password'}")
-      kadm5.create_principal(new_resource.name, mypass)
-      kadm5.generate_random_key(new_resource.name) if randkey
-      new_resource.updated_by_last_action(true)
+      converge_by "create-principal-#{new_resource.name}" do
+        kadm5.create_principal(new_resource.name, mypass)
+        kadm5.generate_random_key(new_resource.name) if randkey
+      end
     end
   ensure
     kadm5.close unless kadm5.nil?
@@ -51,8 +53,9 @@ action :delete do
     kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
     unless kadm5_find_principal(kadm5, new_resource.name).nil?
       Chef::Log.info("Removing #{new_resource.name} principal from Kerberos")
-      kadm5.delete_principal(new_resource.name)
-      new_resource.updated_by_last_action(true)
+      converge_by "delete-principal-#{new_resource.name}" do
+        kadm5.delete_principal(new_resource.name)
+      end
     end
   ensure
     kadm5.close unless kadm5.nil?
