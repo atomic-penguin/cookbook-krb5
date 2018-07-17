@@ -1,5 +1,9 @@
 ## Unreleased
 
+## v2.2.2
+  Add a service for kpropd
+  Update testing framework (ChefDK)
+
 ## v2.2.1
   Fix typo is guard around senstive in krb5_keytab
   Update testing framework (Gemfile/Berksfile)
