@@ -1,5 +1,8 @@
 ## Unreleased
 
+## v2.2.3
+  Restore functionality in "find" helpers
+
 ## v2.2.2
   Add a service for kpropd
   Update testing framework (ChefDK)
