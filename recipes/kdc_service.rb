@@ -3,6 +3,7 @@
 # Recipe:: kdc_service
 #
 # Copyright © 2014 Cask Data, Inc.
+# Copyright © 2018 Chris Gianelloni
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +24,8 @@ include_recipe 'krb5::kdc'
 service 'krb5-kdc' do
   service_name node['krb5']['kdc']['service_name']
   action node['krb5']['kdc']['service_actions']
+  subscribes :restart, "template['#{node['krb5']['data_dir']}/kdc.conf']", :delayed if node['krb5']['kdc']['service_actions'].find \
+    { |a| /start/ =~ a }
 end
 
 service 'kprop' do
