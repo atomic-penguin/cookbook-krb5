@@ -1,5 +1,9 @@
 ## Unreleased
 
+## v2.3.0
+  Conditionally restart KDC on config change
+  Update how we default kadmind and KDC services
+
 ## v2.2.3
   Restore functionality in "find" helpers
 
