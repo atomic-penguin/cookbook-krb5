@@ -28,7 +28,15 @@ suites:
     - recipe[krb5::kadmin_init]
     - recipe[krb5::kadmin_service]
     - recipe[krb5::kdc_service]
-    attributes: { krb5: { kadmin: { service_actions: 'start' }, kdc: { service_actions: 'start' } }, krb5_conf: { realms: { default_realm_admin_server: 'localhost' } } }
+    attributes:
+      krb5:
+        kadmin:
+          service_actions: 'start'
+        kdc:
+          service_actions: 'start'
+        krb5_conf:
+          realms:
+            default_realm_admin_server: 'localhost'
   - name: rkerberos
     run_list:
     - recipe[krb5::rkerberos_gem]

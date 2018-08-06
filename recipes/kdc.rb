@@ -3,6 +3,7 @@
 # Recipe:: kdc
 #
 # Copyright © 2014 Cask Data, Inc.
+# Copyright © 2018 Chris Gianelloni
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,8 +19,6 @@
 #
 
 include_recipe 'krb5::default'
-
-node.default['krb5']['krb5_conf']['realms']['default_realm_kdcs'] = node['krb5']['krb5_conf']['realms']['default_realm_kdcs'] + [node['fqdn']]
 
 node['krb5']['kdc']['packages'].each do |krb5_package|
   package krb5_package

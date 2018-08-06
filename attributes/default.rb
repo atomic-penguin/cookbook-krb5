@@ -92,8 +92,8 @@ default['krb5']['krb5_conf']['libdefaults']['ticket_lifetime'] = '24h'
 
 # realms
 default['krb5']['krb5_conf']['realms']['default_realm'] = default_realm
-default['krb5']['krb5_conf']['realms']['default_realm_kdcs'] = []
-default['krb5']['krb5_conf']['realms']['default_realm_admin_server'] = ''
+default['krb5']['krb5_conf']['realms']['default_realm_kdcs'] = [node['fqdn']]
+default['krb5']['krb5_conf']['realms']['default_realm_admin_server'] = node['fqdn']
 default['krb5']['krb5_conf']['realms']['realms'] = [default_realm]
 
 # includedir
