@@ -25,18 +25,18 @@ default_realm = node['krb5']['krb5_conf']['libdefaults']['default_realm'].upcase
 log 'create-krb5-db' do
   message 'Creating Kerberos Database... this may take a while...'
   level :info
-  not_if "test -e #{node['krb5']['kdc_conf']['realms'][default_realm]['database_name']}"
+  not_if { ::File.exist?(node['krb5']['kdc_conf']['realms'][default_realm]['database_name']) }
 end
 
 execute 'create-krb5-db' do # ~FC009
-  command "echo '#{node['krb5']['master_password']}\n#{node['krb5']['master_password']}\n' | kdb5_util -r #{default_realm} create -s"
-  not_if "test -e #{node['krb5']['kdc_conf']['realms'][default_realm]['database_name']}"
+  command "{ echo '#{node['krb5']['master_password']}'; echo '#{node['krb5']['master_password']}'; } | kdb5_util -r #{default_realm} create -s"
+  not_if { ::File.exist?(node['krb5']['kdc_conf']['realms'][default_realm]['database_name']) }
   sensitive true if respond_to?(:sensitive)
   creates node['krb5']['kdc_conf']['realms'][default_realm]['database_name']
 end
 
 execute 'create-admin-principal' do
-  command "echo '#{node['krb5']['admin_password']}\n#{node['krb5']['admin_password']}\n' | kadmin.local -q 'addprinc #{node['krb5']['admin_principal']}'"
+  command "{ echo '#{node['krb5']['admin_password']}'; echo '#{node['krb5']['admin_password']}'; } | kadmin.local -q 'addprinc #{node['krb5']['admin_principal']}'"
   not_if "kadmin.local -q 'list_principals' | grep -e ^#{node['krb5']['admin_principal']}"
   sensitive true if respond_to?(:sensitive)
 end
