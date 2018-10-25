@@ -1,5 +1,9 @@
 ## Unreleased
 
+## v2.3.1
+  Update how the passwords are sent to kdb5_util when creating realm db
+  Changed guard for realm db creation from test -e to File.exist?
+
 ## v2.3.0
   Conditionally restart KDC on config change
   Update how we default kadmind and KDC services
