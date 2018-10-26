@@ -25,7 +25,7 @@ service 'krb5-kdc' do
   service_name node['krb5']['kdc']['service_name']
   action node['krb5']['kdc']['service_actions']
   subscribes :restart, "template['#{node['krb5']['data_dir']}/kdc.conf']", :delayed \
-    if [ *node['krb5']['kdc']['service_actions']].find { |a| /start/ =~ a }
+    if [*node['krb5']['kdc']['service_actions']].find { |a| /start/ =~ a }
 end
 
 service 'kprop' do
