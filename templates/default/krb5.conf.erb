@@ -36,10 +36,19 @@ includedir <%= dir %>
  }
  <% end -%>
 
- <% @realms['realms'].each do |krb5_realm| -%>
+ <% if @realms['realms'].kind_of?(Array) -%>
+  <% @realms['realms'].each do |krb5_realm| -%>
  <%= krb5_realm.downcase -%> = <%= krb5_realm.upcase %>
  .<%= krb5_realm.downcase -%> = <%= krb5_realm.upcase %>
- <% end -%>
+  <% end -%>
+ <% else -%>
+  <% @realms['realms'].each do |realm, dns| -%>
+    <% [*dns].each do |d| -%>
+ <%= d.downcase -%> = <%= realm.upcase %>
+ .<%= d.downcase -%> = <%= realm.upcase %>
+     <% end -%>
+   <% end -%>
+  <% end %>
 <% end %>
 
 <% if @appdefaults %>
