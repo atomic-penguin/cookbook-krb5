@@ -1,10 +1,14 @@
 driver:
   name: dokken
+  hostname: dokken.local
   privileged: true # because Docker, systemd, and sysctl
   chef_version: <%= ENV['CHEF_VERSION'] || 'current' %>
 
 transport:
   name: dokken
+
+verifier:
+  name: inspec
 
 provisioner:
   name: dokken
@@ -15,9 +19,12 @@ platforms:
   driver:
     image: dokken/centos-7
     pid_one_command: /usr/lib/systemd/systemd
-    # This is needed because dcos-spartan.service does "modprobe dummy"
-    volumes:
-    - /lib/modules:/lib/modules:ro
+# - name: ubuntu-16.04
+#   driver:
+#     image: dokken/ubuntu-16.04
+#     pid_one_command: /bin/systemd
+#     intermediate_instructions:
+#       - RUN /usr/bin/apt-get update
 
 suites:
   - name: default
@@ -40,3 +47,24 @@ suites:
   - name: rkerberos
     run_list:
     - recipe[krb5::rkerberos_gem]
+  - name: legacy
+    run_list:
+    - recipe[krb5]
+    attributes:
+      krb5:
+        krb5_conf:
+          realms:
+            realms:
+            - LOCAL
+  - name: multi
+    run_list:
+    - recipe[krb5]
+    attributes:
+      krb5:
+        krb5_conf:
+          realms:
+            realms:
+              LOCAL: local
+              INTERNAL:
+              - internal
+              - ec2.internal

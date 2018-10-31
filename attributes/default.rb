@@ -95,7 +95,10 @@ default['krb5']['krb5_conf']['libdefaults']['ticket_lifetime'] = '24h'
 default['krb5']['krb5_conf']['realms']['default_realm'] = default_realm
 default['krb5']['krb5_conf']['realms']['default_realm_kdcs'] = [node['fqdn']]
 default['krb5']['krb5_conf']['realms']['default_realm_admin_server'] = node['fqdn']
-default['krb5']['krb5_conf']['realms']['realms'] = [default_realm]
+# This syntax is deprecated, but will still work for defining realms w/ 1:1 mapping to DNS
+# default['krb5']['krb5_conf']['realms']['realms'] = [default_realm]
+# This attribute can be a single value or a list
+default['krb5']['krb5_conf']['realms']['realms'][default_realm] = node['domain']
 
 # includedir
 default['krb5']['krb5_conf']['includedir'] = []
