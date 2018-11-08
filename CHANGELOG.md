@@ -1,5 +1,9 @@
 ## Unreleased
 
+## v2.4.0
+  Support multiple DNS mappings to a realm
+  Change password echos via @JaBurd
+
 ## v2.3.0
   Conditionally restart KDC on config change
   Update how we default kadmind and KDC services
