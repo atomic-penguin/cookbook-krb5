@@ -1,5 +1,9 @@
 ## Unreleased
 
+## v2.5.0
+  Use kitchen-dokken instead of kitchen-virtualbox
+  Split KDC DB to its own recipe
+
 ## v2.4.0
   Support multiple DNS mappings to a realm
   Change password echos via @JaBurd
