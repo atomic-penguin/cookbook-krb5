@@ -31,6 +31,7 @@ suites:
     - recipe[krb5]
   - name: kadmin
     run_list:
+    - recipe[krb5::kdc_init]
     - recipe[krb5::kadmin_init]
     - recipe[krb5::kadmin_service]
     - recipe[krb5::kdc_service]
