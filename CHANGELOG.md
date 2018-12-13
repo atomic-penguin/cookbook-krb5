@@ -1,5 +1,8 @@
 # krb5 cookbook
 
+## v2.6.0
+- Make authconfig optional #50
+
 ## v2.5.0
 - Use kitchen-dokken instead of kitchen-virtualbox
 - Split KDC DB to its own recipe
