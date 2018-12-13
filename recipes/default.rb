@@ -43,5 +43,5 @@ template '/etc/krb5.conf' do
   group 'root'
   mode '0644'
   variables node['krb5']['krb5_conf']
-  notifies :run, 'execute[krb5-authconfig]'
+  notifies :run, 'execute[krb5-authconfig]' if node['krb5']['do_authconfig']
 end

@@ -74,6 +74,9 @@ override['build-essential']['compile_time'] = true
 # Include ntp recipe?
 default['krb5']['include_ntp'] = true
 
+# Should we perform auth-cnofig or not
+default['krb5']['do_authconfig'] = true
+
 # Client Packages
 default['krb5']['client']['packages'] = node['krb5']['packages']
 default['krb5']['client']['authconfig'] = node['krb5']['authconfig']
