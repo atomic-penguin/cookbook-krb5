@@ -3,6 +3,7 @@
 # Resource:: keytab
 #
 # Copyright © 2014 Cask Data, Inc.
+# Copyright © 2018 Chris Gianelloni
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,11 +18,73 @@
 # limitations under the License.
 #
 
-actions :create, :delete
-default_action :create
+property :group, [Integer, String], default: 'root'
+property :mode, [Integer, String], default: '0600'
+property :owner, [Integer, String], default: 'root'
+property :path, String, name_property: true
+property :principals, [Array, String], required: true
 
-attribute :path,       :kind_of => String,         :name_attribute => true
-attribute :principals, :kind_of => Array,          :default => [], :required => true
-attribute :owner,      :kind_of => String,         :default => 'root'
-attribute :group,      :kind_of => String,         :default => 'root'
-attribute :mode,       :kind_of => String,         :default => '0600'
+action :create do
+  krb5_load_gem
+  krb5_verify_admin
+  begin
+    kadm5 = kadm5_init(node['krb5']['admin_principal'], node['krb5']['admin_password'])
+    keytab = keytab_init("FILE:#{new_resource.path}")
+
+    # Should we use @current_resource.exists here instead?
+    unless ::File.exist?(new_resource.path)
+
+      directory ::File.dirname(new_resource.path) do
+        owner 'root'
+        group 'root'
+        mode '0755'
+        action :create
+      end
+
+      new_resource.principals.each do |princ|
+        sv = kadm5_find_principal(kadm5, princ)
+        next unless sv.nil?
+        Chef::Application.fatal!("Principal #{princ} not found on KDC! Perhaps you need to create it with krb5_principal, first.")
+      end
+
+      principals = principal_list(new_resource.principals)
+
+      execute 'kinit as configured admin principal' do # ~FC009
+        command "echo #{node['krb5']['admin_password']} | kinit #{node['krb5']['admin_principal']}"
+        not_if "test -e #{new_resource.path}"
+        action :run
+        sensitive true if respond_to?(:sensitive)
+      end
+
+      execute "create #{new_resource.path}" do # ~FC009
+        command "kadmin -w #{node['krb5']['admin_password']} -q 'xst -kt #{new_resource.path} #{principals}'"
+        not_if "test -e #{new_resource.path}"
+        action :run
+        creates new_resource.path
+        sensitive true if respond_to?(:sensitive)
+      end
+
+      file new_resource.path do
+        owner new_resource.owner
+        group new_resource.group
+        mode  new_resource.mode
+        action :create
+      end
+    end
+  ensure
+    keytab.close unless keytab.nil?
+  end
+end
+
+action :delete do
+  if ::File.exist?(new_resource.path)
+    Chef::Log.info("Removing #{new_resource.name} keytab file")
+    file new_resource.path do
+      action :delete
+    end
+  end
+end
+
+action_class do
+  include Krb5::Helpers
+end

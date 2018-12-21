@@ -17,5 +17,5 @@ source_url 'https://github.com/atomic-penguin/cookbook-krb5' if
   respond_to?(:source_url)
 issues_url 'https://github.com/atomic-penguin/cookbook-krb5/issues' if
   respond_to?(:issues_url)
-chef_version '>= 11.0' if
+chef_version '>= 12.15' if
   respond_to?(:chef_version)

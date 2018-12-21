@@ -68,6 +68,9 @@ default_realm =
 # Default location for keytabs generated from LWRP
 default['krb5']['keytabs_dir'] = '/etc/security/keytabs'
 
+# Default principals
+default['krb5']['default_principals'] = ["host/#{node['fqdn']}"]
+
 # Install build-essential at compile time
 override['build-essential']['compile_time'] = true
 
