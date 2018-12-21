@@ -1,5 +1,12 @@
 # krb5 cookbook
 
+## v3.0.0
+
+*** Breaking Change ***
+This version of the cookbook is no longer compatible with Chef versions older than 12.15
+
+- Convert LWRPs to custom resources #49
+
 ## v2.6.0
 - Make authconfig optional #50
 
